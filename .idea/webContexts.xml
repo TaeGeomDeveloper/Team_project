@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebContextManager">
+    <option name="state">
+      <map>
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/board/ReadTest.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/board" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/smartfarm/Login.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/smartfarm" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/smartfarm/ReadInfo.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/smartfarm" />
+      </map>
+    </option>
+  </component>
+</project>
