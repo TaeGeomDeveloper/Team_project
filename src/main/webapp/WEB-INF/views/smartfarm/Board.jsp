@@ -18,7 +18,7 @@
 
     <%-- 폰트 --%>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap'); /* 수정 연습 */
     </style>
 
     <style>
