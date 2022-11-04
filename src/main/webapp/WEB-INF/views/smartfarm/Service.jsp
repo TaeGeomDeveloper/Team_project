@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: User
-  Date: 2022-10-05
-  Time: 오후 2:38
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -13,13 +7,9 @@
 <head>
     <title>s=/service</title>
 
-    <%-- 폰트 --%>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
-    </style>
     <style>
         .serviceDl {
-
+            border-right: 1px solid black;
             padding: 10px;
         }
 
@@ -29,18 +19,14 @@
 
         .serviceDl dt {
             text-align: center;
-        }
-
-        .serviceDl {
-            border-right: 1px solid black;
+            border: 1px solid black;
+            border-radius: 7px;
+            margin-top: -1.5em;
+            background-color: #6DD66D;
         }
 
         .serviceDl p {
             font-size: 17px;
-        }
-
-        .serviceDl {
-            border-right: 1px solid black;
         }
 
         .serviceBody dl {
@@ -52,7 +38,7 @@
         .serviceBody {
             display: table;
             width: 90%;
-            background-color: red;
+            background-color: lightgreen;
             margin-left: auto;
             margin-right: auto;
             border: 1px solid black;
@@ -60,16 +46,8 @@
             min-height: 15em;
         }
 
-        #serviceDl dt {
-            border: 1px solid black;
-            border-radius: 7px;
-            margin-top: -1.5em;
-            background-color: #6DD66D;
-
-        }
-
-        #serviceDl span {
-            color: lightblue;
+        .serviceDl span {
+            color: white;
         }
 
 
@@ -141,7 +119,7 @@
                 <span>서비스 내용 정리</span>
             </h5>
             <div class="serviceBody">
-                <dl class="serviceDl" class="serviceDl">
+                <dl class="serviceDl">
                     <dt>
                         <span>작물선택 서비스</span>
                     </dt>
@@ -151,7 +129,7 @@
                         </p>
                     </dd>
                 </dl>
-                <dl class="serviceDl" class="serviceDl">
+                <dl class="serviceDl">
                     <dt>
                         <span>시세 집계</span>
                     </dt>
@@ -163,7 +141,7 @@
                     </dd>
 
                 </dl>
-                <dl class="serviceDl" class="serviceDl">
+                <dl class="serviceDl">
                     <dt>
                         <span>재배 기술</span>
                     </dt>
@@ -174,7 +152,7 @@
                     </dd>
 
                 </dl>
-                <dl class="" class="serviceDl">
+                <dl class="serviceDl">
                     <dt>
                         <span>재반 시설 정보</span>
                     </dt>
