@@ -86,12 +86,12 @@ public class MemberDAO {
 	}
 
 	//아이디 찾기
-	public MemberVO findId(String mi_name, String mi_phone){
+	public String findId(String mi_name, String mi_phone){
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("mi_name", mi_name);
 		map.put("mi_phone", mi_phone);
-		MemberVO member = sqlSession.selectOne("mapper.member.findId", map);
-		return member;
+		String result = sqlSession.selectOne("mapper.member.findId", map);
+		return result;
 	}
 
 

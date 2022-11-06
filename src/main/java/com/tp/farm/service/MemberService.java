@@ -10,6 +10,12 @@ public class MemberService {
     @Autowired
     private MemberDAO memberDAO;
 
+    public String findId(String name, String email){
+        String result = "";
+        result = memberDAO.findId(name, email);
+
+        return result;
+    }
 
     public boolean isMemberId(String mi_id) {
         boolean flag = false;
