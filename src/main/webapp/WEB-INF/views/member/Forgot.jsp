@@ -74,10 +74,10 @@
                         $("#floatingInputID").val('');
                         $("#floatingInputEmail").val('');
                     } else {
-                        alert("등록된 이메일로 비밀번호를 발송했습니다.");
                         Find.method = "post";
                         Find.action = "./Login.do";
                         Find.submit();
+                        alert("등록된 이메일로 비밀번호를 발송했습니다.");
                     }
                 },
                 error: function (data, status) {

@@ -52,8 +52,8 @@ public class NaverSensV2 {
         String hostNameUrl = "https://sens.apigw.ntruss.com"; // 호스트 URL
         String requestUrl= "/sms/v2/services/"; // 요청 URL
         String requestUrlType = "/messages"; // 요청 URL
-        String accessKey = "E0ecEvwxC4zcnjy118OE";   // 개인 인증키
-        String secretKey = "lZom6uDQbjwP03P5IJ4Y3sHoBYlX8aUCBxP6vhEt";  // 2차 인증을 위해 서비스마다 할당되는 service secret
+        String accessKey = "ChHmzBjc96AITDXf7e5F";   // 개인 인증키
+        String secretKey = "8ACaourvbyM1x3QekkjCPTjJ4B0YqUliTaYONSpn";  // 2차 인증을 위해 서비스마다 할당되는 service secret
         String serviceId = "ncp:sms:kr:282376441744:phone_authentication";  // 프로젝트에 할당된 SMS 서비스 ID
         String method = "POST";	// 요청 method
         String timestamp = Long.toString(System.currentTimeMillis()); 	// current timestamp (epoch)
