@@ -83,7 +83,7 @@
         ]]>
     </select>
 
-    <select id="findId" resultType="memberVO"  parameterType="java.util.Map" >
+    <select id="findId" resultType="String"  parameterType="java.util.Map" >
       <![CDATA[
         select * from member_information
         where

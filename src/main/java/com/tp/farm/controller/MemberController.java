@@ -166,14 +166,18 @@ public class MemberController {
 	}
 	// 비빌번호 찾기
 	@RequestMapping(value = "/findPwd.do", method = {RequestMethod.POST, RequestMethod.GET})
-	public ModelAndView findPwd(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public ResponseEntity<String> findPwd(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		Boolean flag = false;
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 		ModelAndView mav = new ModelAndView();
 		String mi_id = request.getParameter("mi_id");
 		String mi_email = request.getParameter("mi_email");
+		System.out.println("mi_id : "+mi_id);
+		System.out.println("mi_email : "+mi_email);
 		MemberVO member = memberDAO.findPwd(mi_id,mi_email);
 		if(member!=null){
+			flag = true;
 			String mi_password = member.getMi_password();
 			System.out.println(mi_password+"find pwd success");
 			mailService.sendMail(mi_email,"smartfarm find password",mi_id+" password is"+mi_password+".");
@@ -181,33 +185,35 @@ public class MemberController {
 		}else{
 			mav.setViewName("/member/Forgot");
 		}
-		return mav;
+		System.out.println("findPwd status --->"+flag);
+		return new ResponseEntity<String>(String.valueOf(flag),HttpStatus.OK);
 	}
+
 	// 아이디 찾기
 	@RequestMapping(value = "/findId.do", method = {RequestMethod.POST, RequestMethod.GET})
-	public ModelAndView findId(HttpServletRequest request, HttpServletResponse response) throws  Exception{
-		ModelAndView mav = new ModelAndView();
+	@ResponseBody
+	public String findId(HttpServletRequest request, HttpServletResponse response) throws  Exception{
 		String mi_name = request.getParameter("mi_name");
 		String mi_phone = request.getParameter("mi_phone");
-
-		MemberVO member = memberDAO.findId(mi_name, mi_phone);
-		if(member!=null){
-			String mi_id = member.getMi_id();
-			System.out.println(mi_id+" find id success");
-			mav.setViewName("/member/Login");
-		}else{
-			mav.setViewName("/member/Forgot");
-		}
-		return mav;
+		System.out.println("mi_name : "+mi_name);
+		System.out.println("mi_phone : "+mi_phone);
+		String result = memberService.findId(mi_name, mi_phone);
+		System.out.println(result);
+		return result;
 	}
+
 	// 아이디 체크
 	@RequestMapping(value = "/idCheck.do", method = RequestMethod.GET)
 	public ResponseEntity<String> idCheck(@RequestParam("mi_id") String mi_id){
 		boolean flag = false;
 		System.out.println("idCheck"+mi_id);
 		flag = memberService.isMemberId(mi_id);
+		if(mi_id==""){
+			flag = true;
+		}
 		return new ResponseEntity<String>(String.valueOf(flag), HttpStatus.OK);
 	}
+
 	// 문자 전송
 	@RequestMapping(value = "/sendSMS.do", method = {RequestMethod.POST, RequestMethod.GET})
 	public String sendSMS(String to){

@@ -26,7 +26,7 @@
         function fn_find() {
             var Find = document.Find;
 
-            Find.method = "get";
+            Find.method = "post";
             Find.action = "./Forgot.do";
             Find.submit();
         }

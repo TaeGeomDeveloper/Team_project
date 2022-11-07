@@ -283,7 +283,7 @@
                     <tr>
                         <th>ID</th>
                         <td>
-                            <input type="text" name="mi_id" id="mi_id">
+                            <input type="text" name="mi_id" id="mi_id" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                             <input type="button" class="button" name="id_check" value="중복확인" id="idCheck">
                             <span id="msg" style="color:green"></span>
                             <span style="font-size: 8pt;">아이디는 영문+숫자 조합으로 6~12자리 사용해야 합니다.</span>
