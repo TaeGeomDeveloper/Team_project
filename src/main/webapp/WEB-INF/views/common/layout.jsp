@@ -1,3 +1,9 @@
+<!--
+작성자 : 윤태검
+내용 : 타일즈 Header 부분 과 네비
+
+일시 : 2022.10.10 ~
+-->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" isELIgnored="false"
 %>

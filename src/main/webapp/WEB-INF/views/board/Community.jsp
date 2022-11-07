@@ -1,6 +1,6 @@
 <!--
     작성자 : 윤태검, 이영록
-    내용 : 자유게시판 화면 설계 및 구성. / Commnuity.jsp
+    내용 : 쉼터 화면 설계 및 구성. / Commnuity.jsp
 
     일시 : 2022.10.10 ~
 -->
@@ -18,7 +18,14 @@
 <section>
     <article>
         <div id="Main_Box" align="center" style="margin-top: 30px">
-            <h1> 자유 게시판 </h1>
+            <h1> 쉼터 </h1>
+
+            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                <option selected>Open this select menu</option>
+                <option value="1">일상</option>
+                <option value="2">공유</option>
+                <option value="3">Q&A</option>
+            </select>
 
             <div class="d-flex justify-content-center" style="width: 90%; text-align: center">
                 <table class="table align-middle table-hover" style="margin-top: 30px; border: 5px solid #04AA6D;">
