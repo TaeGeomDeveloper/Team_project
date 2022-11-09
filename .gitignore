@@ -1,3 +1,3 @@
 # 프로젝트 제외 경로
-/src/main/java/com/tp/farm/utils/NaverSensV2.java
-/src/main/webapp/WEB-INF/spring/mail-context.xml
+NaverSensV2.java
+mail-context.xml
