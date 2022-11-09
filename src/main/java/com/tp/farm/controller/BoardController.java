@@ -44,6 +44,7 @@ public class BoardController {
     public ModelAndView Main(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("Main");
+        System.out.println("hi"); // git 연습용.
         return mav;
     }
     //게시글 전체조회 페이지 - 이영록

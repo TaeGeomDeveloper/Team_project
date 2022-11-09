@@ -67,7 +67,7 @@
                     </tbody>
                 </table>
             </div>
-            <div style="width: 80%; border: 5px solid #04AA6D; border-radius: 20px; height: 700px">
+            <div style="width: 80%; border: 5px solid #04AA6D; border-radius: 20px; height: 700px; text-align: left">
                 ${board.cb_content}
             </div>
 

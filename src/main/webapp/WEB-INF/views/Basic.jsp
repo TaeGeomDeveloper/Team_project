@@ -5,7 +5,7 @@
 <html>
 <head>
     <title>Main</title>
-
+    <!-- 응애 -->
     <!-- 스타일시트 연결 -->
     <script src="http://code.jquery.com/jquery-latest.js"></script>
 
