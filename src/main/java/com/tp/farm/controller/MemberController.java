@@ -6,7 +6,6 @@ import com.tp.farm.utils.NaverSensV2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import com.tp.farm.dao.MemberDAO;
@@ -91,24 +90,21 @@ public class MemberController {
 		mav.setViewName("Main");
 		return mav;
 	}
+
 	// 로그인 절차
-	@RequestMapping(value="/loginProcess.do", method= RequestMethod.POST)
-	public ModelAndView loginProcess(@RequestParam("mi_id") String mi_id, @RequestParam("mi_password") String mi_password, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ModelAndView mav = new ModelAndView();
+	@RequestMapping(value="/loginProcess.do", method = {RequestMethod.POST, RequestMethod.GET})
+	public ResponseEntity<String> loginProcess(@RequestParam("mi_id") String mi_id, @RequestParam("mi_password") String mi_password, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Boolean flag = false;
 
-		MemberVO memberVO = memberDAO.checkMember(mi_id, mi_password);
-
-		if(memberVO!=null) {
-			System.out.println("login ok");
-			request.getSession().setAttribute("user", memberVO);
-//			mav.setViewName("redirect:/smartfarm/Main.do");
-			mav.setViewName("Main");
-		}else{
-			System.out.println("wrong info");
-			mav.setViewName("/member/Login");
+		MemberVO member = memberDAO.checkMember(mi_id, mi_password);
+		if(member!=null){
+			flag = true;
+			request.getSession().setAttribute("user", member);
 		}
-		return mav;
+		System.out.println("로그인 회원 체크 : "+flag);
+		return new ResponseEntity<String>(String.valueOf(flag),HttpStatus.OK);
 	}
+
 	// 로그아웃
 	@RequestMapping(value="/Logout.do", method=RequestMethod.GET)
 	public ModelAndView logout(HttpServletRequest request,
@@ -167,10 +163,9 @@ public class MemberController {
 	// 비빌번호 찾기
 	@RequestMapping(value = "/findPwd.do", method = {RequestMethod.POST, RequestMethod.GET})
 	public ResponseEntity<String> findPwd(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		Boolean flag = false;
+		boolean flag = false;
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
-		ModelAndView mav = new ModelAndView();
 		String mi_id = request.getParameter("mi_id");
 		String mi_email = request.getParameter("mi_email");
 		System.out.println("mi_id : "+mi_id);
@@ -181,9 +176,6 @@ public class MemberController {
 			String mi_password = member.getMi_password();
 			System.out.println(mi_password+"find pwd success");
 			mailService.sendMail(mi_email,"smartfarm find password",mi_id+" password is"+mi_password+".");
-			mav.setViewName("/member/Login");
-		}else{
-			mav.setViewName("/member/Forgot");
 		}
 		System.out.println("findPwd status --->"+flag);
 		return new ResponseEntity<String>(String.valueOf(flag),HttpStatus.OK);
@@ -206,7 +198,7 @@ public class MemberController {
 	@RequestMapping(value = "/idCheck.do", method = RequestMethod.GET)
 	public ResponseEntity<String> idCheck(@RequestParam("mi_id") String mi_id){
 		boolean flag = false;
-		System.out.println("idCheck"+mi_id);
+		System.out.println("idCheck : "+mi_id);
 		flag = memberService.isMemberId(mi_id);
 		if(mi_id==""){
 			flag = true;
