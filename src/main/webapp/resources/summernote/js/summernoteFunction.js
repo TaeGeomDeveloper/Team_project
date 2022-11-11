@@ -1,27 +1,29 @@
-/*서머노트 function*/
+$(document).ready(function()
+	{
+	    var fontSizes = [ '8', '9', '10', '11', '12', '14','16', '18', '20', '22', '24', '28', '30', '36', '50', '72','100' ];
+		var fontNames = [ '맑은 고딕', '궁서', '굴림체', '굴림', '바탕체', 'Arial', 'Arial Black','Comic Sans MS', 'Courier New' ];
+		var toolbar = [[ 'fontname', [ 'fontname' ] ],
+		[ 'fontsize', [ 'fontsize' ] ],
+		[ 'style',    [ 'bold', 'italic', 'underline','strikethrough', 'clear' ] ],
+		[ 'color', [ 'forecolor', 'color' ] ],
+		[ 'table', [ 'table' ] ],
+		[ 'para', [ 'ul', 'ol', 'paragraph' ] ],
+		[ 'height', [ 'height' ] ],
+		[ 'insert',[ 'picture','link','video' ]],
+		[ 'view', [ 'codeview', 'help'] ]
+		];
 
-$(document).ready(function() {
-    $('#cb_content').summernote({
-        height: 700,
-        fontNames : [ '맑은고딕', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', ],
-        fontNamesIgnoreCheck : [ '맑은고딕' ],
-        focus: true,
-        lang: "ko-KR",					// 한글 설정
-        placeholder: '내용을 입력해주세요',	//placeholder 설정
-        toolbar: [
-                  // [groupName, [list of button]]
-                  ['fontname', ['fontname']],
-                  ['fontsize', ['fontsize']],
-                  ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
-                  ['color', ['forecolor','color']],
-                  ['table', ['table']],
-                  ['para', ['ul', 'ol', 'paragraph']],
-                  ['height', ['height']],
-                  ['insert',['picture','link','video']],
-                  ['view', ['fullscreen', 'codeview', 'help']]
-                ],
-              fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
-              fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
-    });
+         var setting = {
+            height : 700,
+            width : 1000,
+            minHeight : 700,
+            maxHeight : 700,
+            focus : true,
+            lang : 'ko-KR',
+            toolbar : toolbar,
+            fontSizes : fontSizes,
+            fontNames : fontNames
+            };
+
+         $('#cb_content').summernote(setting);
 });
-

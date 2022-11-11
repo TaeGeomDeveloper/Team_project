@@ -13,18 +13,10 @@
 <head>
     <title>Insert</title>
     <%-- summernote 라이브러리 추가 --%>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script type="text/javascript" src="${contextPath}/resources/summernote/js/summernote-lite.js" charset="UTF-8"></script>
     <script type="text/javascript" src="${contextPath}/resources/summernote/lang/summernote-ko-KR.js" charset="UTF-8"></script>
     <link rel="stylesheet" href="${contextPath}/resources/summernote/css/summernote-lite.css">
     <script type="text/javascript" src="${contextPath}/resources/summernote/js/summernoteFunction.js" charset="UTF-8"></script>
-
-    <style>
-        textarea(#cb_content) {
-            box-sizing: inherit;
-            font-family: '맑은고딕', sans-serif;
-        }
-    </style>
 
 </head>
 <body>
@@ -49,8 +41,7 @@
                         </tr>
                         <tr>
                             <th>내용</th>
-                            <td style="width: 1000px"><textarea name="cb_content" id="cb_content" rows="30" cols="100"
-                                                                placeholder=""></textarea></td>
+                            <td width="1000px"><textarea name="cb_content" id="cb_content" placeholder=""></textarea></td>
                         </tr>
                         <tr>
                             <th>첨부파일</th>
