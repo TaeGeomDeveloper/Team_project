@@ -30,10 +30,12 @@ public class ConnectionManagerV2 {
 		
 		return con;
 	}
+
+
 	
 	public static Connection getConnection() {
 		Connection con = null;
-		String jdbcURL = "jdbc:mysql://localhost:3306/gntp";
+		String jdbcURL = "jdbc:mysql://localhost:3306/smartfarm";
 		String driver = "com.mysql.cj.jdbc.Driver";
 		String id = "root";
 		String pwd = "1234";
