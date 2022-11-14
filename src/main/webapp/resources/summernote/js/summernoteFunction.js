@@ -7,23 +7,50 @@ $(document).ready(function()
 		[ 'style',    [ 'bold', 'italic', 'underline','strikethrough', 'clear' ] ],
 		[ 'color', [ 'forecolor', 'color' ] ],
 		[ 'table', [ 'table' ] ],
-		[ 'para', [ 'ul', 'ol', 'paragraph' ] ],
-		[ 'height', [ 'height' ] ],
+		[ 'para', [ 'paragraph', 'height' ] ],
 		[ 'insert',[ 'picture','link','video' ]],
 		[ 'view', [ 'codeview', 'help'] ]
 		];
 
-         var setting = {
+        var setting = {
             height : 700,
-            width : 1000,
+            width : '100%',
             minHeight : 700,
             maxHeight : 700,
             focus : true,
             lang : 'ko-KR',
             toolbar : toolbar,
             fontSizes : fontSizes,
-            fontNames : fontNames
-            };
+            fontNames : fontNames,
+            //여기 부분이 이미지를 첨부하는 부분
+            callbacks : {
+                onImageUpload : function(files, editor, welEditable) {
+                    for (var i = 0; i < files.length; i++) {
+                        sendFile(files[i], this);
+                    }
+                }
+            }
+        };
 
-         $('#cb_content').summernote(setting);
+        $('#cb_content').summernote(setting);
+        $('#cb_content').summernote('fontName', '맑은 고딕');
 });
+
+function sendFile(file, editor) {
+	var form_data = new FormData();
+	form_data.append('file', file);
+	$.ajax({
+		data : form_data,
+		type : "POST",
+		url : '/smartfarm/board/summerimages.do',
+		cache : false,
+		contentType : false,
+		enctype : 'multipart/form-data',
+		processData : false,
+		success : function(url) {
+			$(editor).summernote('insertImage', url, function($image) {
+				$image.css('width', "25%");
+			});
+		}
+	});
+}

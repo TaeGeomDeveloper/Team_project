@@ -7,6 +7,7 @@ import com.tp.farm.vo.ReplyVO;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.servlet.ServletRequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,6 +20,7 @@ import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 /*
@@ -157,70 +159,16 @@ public class BoardController {
         return mav;
     }
 
-
-    @RequestMapping(value="/multiImageUploader.do")
-    public void multiImageUploader(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        try {
-            //파일정보를 넣어서 function또는 ajax에 보내기 위한 String
-            String sFileInfo = "";
-            //파일명을 받는다 - 일반 원본파일명
-            String filename = request.getHeader("file-name");
-            //파일 확장자 판별하는 String
-            String filename_ext = filename.substring(filename.lastIndexOf(".")+1);
-            //확장자를 소문자로 변경
-            filename_ext = filename_ext.toLowerCase();
-            //파일 기본경로 : http://localhost:8080/프로젝트/
-            String dftFilePath = request.getSession().getServletContext().getRealPath("/");
-            //파일 기본경로 _ 상세경로(업로드경로) : http://localhost:8080/프로젝트/ + "resource\\upload" + "File.separator는 \\이다" + "smarteditor" + "\\"
-            String filePath = dftFilePath + "resources\\upload" + File.separator + "smarteditor" + File.separator;
-            //File에 업로드되는 저장공간을 지정해준다.
-            File file = new File(filePath);
-            if(!file.exists()) {
-                file.mkdirs();
-            }
-            //업로드된 장소에서 파일이 갖게되는 파일명 : 이런 설정을 하는 이유는 중복이름방지 및 대략적인 업로드 시간도 표시
-            String realFileNm = "";
-            //realFileNm에 추가해줄 업로드날짜
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
-            //날짜를 String으로 변환
-            String today= formatter.format(new java.util.Date());
-            //업로드된 파일명 = 업로드시간 + 랜덤파일명 + 확장자
-            realFileNm = today+UUID.randomUUID().toString() + filename.substring(filename.lastIndexOf("."));
-            //OutputStream으로 write할 경로와 파일을 나타내는 String = 업로드경로 + 바뀐파일명
-            String rlFileNm = filePath + realFileNm;
-            ///////////////// 서버에 파일쓰기 /////////////////
-            InputStream is = request.getInputStream();      //요청에서 전달받은 파일을 읽어(read)준다
-            OutputStream os=new FileOutputStream(rlFileNm); //경로에 업로드파일을 적어(write)준다.
-            //파일을 write할때, '0~파일크기'만큼 while문으로 반복시킬 때 사용하는 int변수
-            int numRead;
-            //파일 크기를 byte타입(8bit)의 배열로 받는다.
-            //request의 getHeader메소드를 이용하면 클라이언트의 다양한 정보를 습득할 수 있다.
-            //byte b[]에 파일에 대한 정보 및 크기 저장
-            byte b[] = new byte[Integer.parseInt(request.getHeader("file-size"))];
-            //while( numRead = InputStream.읽기(위의 b를 사용, 0이 될때까지, b의 길이만큼 != 파일을 다읽어서-1이 되면 읽을게 없어서 멈춘다.)
-            while((numRead = is.read(b,0,b.length)) != -1){
-                //OutputStream으로 적기(위의 b를 사용, 0에서 파일크기끝까지)
-                os.write(b,0,numRead);
-            }
-            if(is != null) {
-                is.close();
-            }
-            os.flush();
-            os.close();
-            ///////////////// 서버에 파일쓰기 /////////////////
-            // 정보 출력
-            sFileInfo += "&bNewLine=true";
-            // function과 ajax로 스마트에디터 안에서 img 태그의 title 속성을 원본파일명으로 적용시켜주기 위함
-            sFileInfo += "&sFileName="+ filename;;
-            // function과 ajax로 스마트에디터 안에서 스마트에디터에 img태그 사용시 img가 있는 url설정
-            sFileInfo += "&sFileURL="+"/smartfarm/resources/upload/smarteditor/"+realFileNm;
-            PrintWriter print = response.getWriter();
-            print.print(sFileInfo);
-            print.flush();
-            print.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    @RequestMapping(value="summerimages.do", method=RequestMethod.POST)
+    public ResponseEntity<?> summerimage(@RequestParam("file") MultipartFile img, HttpServletRequest request) throws IOException {
+        String path =  request.getSession().getServletContext().getRealPath("resources/upload");
+        Random random = new Random();
+        long currentTime = System.currentTimeMillis();
+        int	randomValue = random.nextInt(100);
+        String fileName = Long.toString(currentTime) + "_" + randomValue + "_a_" + img.getOriginalFilename();
+        File file = new File(path , fileName);
+        img.transferTo(file);
+        return ResponseEntity.ok().body("/smartfarm/resources/upload/"+fileName);
     }
 
     //////////////////////////////////////////

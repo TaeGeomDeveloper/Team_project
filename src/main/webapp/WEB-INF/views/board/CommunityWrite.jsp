@@ -18,6 +18,15 @@
     <link rel="stylesheet" href="${contextPath}/resources/summernote/css/summernote-lite.css">
     <script type="text/javascript" src="${contextPath}/resources/summernote/js/summernoteFunction.js" charset="UTF-8"></script>
 
+    <script>
+            function fn_click() {
+                var WriteForm = document.WriteForm;
+                WriteForm.method = "post";
+                WriteForm.action = "./createBoard.do";
+                WriteForm.submit();
+            }
+    </script>
+
 </head>
 <body>
 
