@@ -1,5 +1,6 @@
 package com.tp.farm.controller;
 
+import com.tp.farm.service.CsvService;
 import com.tp.farm.service.MailService;
 import com.tp.farm.service.MemberService;
 import com.tp.farm.utils.NaverSensV2;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.ModelAndView;
 import com.tp.farm.dao.MemberDAO;
 import com.tp.farm.vo.MemberVO;
@@ -26,6 +28,8 @@ public class MemberController {
 	private MailService mailService;
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private CsvService csvService;
 
 	// 메인 페이지
 	@RequestMapping(value = "/Main.do", method = {RequestMethod.GET, RequestMethod.POST})
@@ -34,7 +38,6 @@ public class MemberController {
 		mav.setViewName("Main");
 		return mav;
 	}
-
 	// 로그인
 	@RequestMapping(value = "/Login.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView Login(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -42,6 +45,8 @@ public class MemberController {
 		String viewName = this.getViewName(request);
 		viewName= "/member/Login";
 		mav.setViewName(viewName);
+		csvService.insertDataTraditionalMarket();
+		csvService.insertDataFarmlandPrice();
 		return mav;
 	}
 	// 찾기
@@ -93,14 +98,18 @@ public class MemberController {
 
 	// 로그인 절차
 	@RequestMapping(value="/loginProcess.do", method = {RequestMethod.POST, RequestMethod.GET})
-	public ResponseEntity<String> loginProcess(@RequestParam("mi_id") String mi_id, @RequestParam("mi_password") String mi_password, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		Boolean flag = false;
+	public ResponseEntity<String> loginProcess(@RequestParam("mi_id") String mi_id, @RequestParam("mi_password") String mi_password,
+											   HttpServletRequest request, HttpServletResponse response) throws Exception {
+		boolean flag = false;
 
 		MemberVO member = memberDAO.checkMember(mi_id, mi_password);
 		if(member!=null){
 			flag = true;
 			request.getSession().setAttribute("user", member);
+			boolean session = request.isRequestedSessionIdValid();
+			System.out.println("login session : "+session);
 		}
+
 		System.out.println("로그인 회원 체크 : "+flag);
 		return new ResponseEntity<String>(String.valueOf(flag),HttpStatus.OK);
 	}

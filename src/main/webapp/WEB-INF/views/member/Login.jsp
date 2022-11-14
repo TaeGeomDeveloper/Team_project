@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
@@ -26,17 +27,19 @@
                 console.log(pwd);
 
                 $.ajax({
-                    url:"/smartfarm/member/loginProcess.do",
+                    url:"${contextPath}/member/loginProcess.do",
                     type: "POST",
                     data: {mi_id: id, mi_password: pwd},
                     success : function (data, status){
                         if(data=='false'){
+                            console.log("data false");
                             alert("등록되어 있지 않는 회원입니다.");
                             $("#mi_id").val('');
                             $("#mi_password").val('');
                         }else{
+                            console.log("data true");
                             SendPerson.method = "POST";
-                            SendPerson.action = "./Main.do";
+                            SendPerson.action = "Main.do";
                             SendPerson.submit();
                         }
                     },
@@ -86,7 +89,7 @@
                     </tr>
                     <tr>
                         <td align="center">
-                            <button class="button w-100" type="submit" id="fn_login">로그인</button>
+                            <button class="button w-100" type="button" id="fn_login">로그인</button>
                         </td>
                     </tr>
                 </table>
