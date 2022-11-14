@@ -8,6 +8,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+
 <html>
 <head>
     <title>Forgot</title>
@@ -19,84 +20,73 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
     </style>
-    <%
-        MemberVO member = new MemberVO();
-        MemberDAO memberDAO = new MemberDAO();
-    %>
     <script>
-        function fn_find_id(){
+
+    $(document).ready(function (){
+        $("#fn_find_id").on('click',function (event) {
             var Find = document.Find;
 
-            let name = $("#floatingInputName").val()
-            let phone = $("#floatingInputPhone").val()
+            let name = $("#floatingInputName").val();
+            let phone = $("#floatingInputPhone").val();
 
             console.log(name);
             console.log(phone);
             $.ajax({
-                url:"./findId.do",
-                type: "POST",
+                url:"/smartfarm/member/findId.do",
+                type : "get",
                 data:{mi_name :name, mi_phone :phone},
-                success:function (data, status){
-                    if(data==0){
-                        alert("이름 또는 휴대전화를 잘못 입력하셨습니다.");
-                        $("#floatingInputName").val('');
-                        $("#floatingInputPhone").val('');
-                    }else{
-                        alert("회원님의 아이디는 "+data+"입니다");
-                        Find.method = "post";
-                        Find.action = "./Login.do";
-                        Find.submit();
+                    success:function (data, status){
+                        if(data==0){
+                            alert("이름 또는 휴대전화를 잘못 입력하셨습니다.");
+                            $("#floatingInputName").val('');
+                            $("#floatingInputPhone").val('');
+                        }else{
+                            alert("회원님의 아이디는 "+data+"입니다");
+                            Find.method = "post";
+                            Find.action = "/smartfarm/member/Login.do";
+                            Find.submit();
+                        }
+                    },
+                    error:function (data,status){
+                        alert(status);
                     }
-                },
-                error:function (data,status){
-                    alert(status);
-                }
             });
-        }
+        });
+    });
     </script>
 
     <script>
-        function fn_find_pwd() {
-            var Find = document;
+        $(document).ready(function (){
+            $("#fn_find_pwd").on('click',function (event) {
+                var Find = document.Find;
 
-            let id = $("#floatingInputID").val();
-            let email = $("#floatingInputEmail").val();
-            console.log(id)
-            console.log(email)
-
-            $.ajax({
-                url: "./findPwd.do",
-                type: "POST",
-                data:{mi_id: id, mi_email: email},
-                success: function (data, status) {
-                    if (data == "false") {
-                        alert("아이디 또는 이메일을 잘못 입력하셨습니다.")
-                        $("#floatingInputID").val('');
-                        $("#floatingInputEmail").val('');
-                    } else {
-                        alert("등록된 이메일로 비밀번호를 발송했습니다.");
-                        Find.method = "post";
-                        Find.action = "./Login.do";
-                        Find.submit();
+                let id = $("#floatingInputID").val();
+                let email = $("#floatingInputEmail").val();
+                console.log(id)
+                console.log(email)
+                $.ajax({
+                    url: "/smartfarm/member/findPwd.do",
+                    type: "POST",
+                    data:{mi_id: id, mi_email: email},
+                    success: function (data, status) {
+                        if (data == "false") {
+                            alert("아이디 또는 이메일을 잘못 입력하셨습니다.")
+                            $("#floatingInputID").val('');
+                            $("#floatingInputEmail").val('');
+                        } else {
+                            Find.method = "post";
+                            Find.action = "/smartfarm/member/Login.do";
+                            Find.submit();
+                            alert("등록된 이메일로 비밀번호를 발송했습니다.");
+                        }
+                    },
+                    error: function (data, status) {
+                        alert(status);
                     }
-                },
-                error: function (data, status) {
-                    alert(status);
-                }
+                });
             });
-        }
-        <%--    if(id==<%=member.getMi_id()%>){--%>
-        <%--        alert("입력하신 이메일로 비밀번호를 발송했습니다");--%>
-        <%--        const Find = document.Find;--%>
-        <%--        Find.method = "post";--%>
-        <%--        Find.action = "./findPwd.do";--%>
-        <%--        Find.submit();--%>
-        <%--    }else{--%>
-        <%--        alert("아이디 또는 이메일이 존재하지 않습니다");--%>
-        <%--    }--%>
-        <%--}--%>
+        });
     </script>
-
 </head>
 <body>
 
@@ -130,7 +120,7 @@
                                 </tr>
                                 <tr>
                                     <td align="center">
-                                        <button class="button w-100" type="submit" onclick="fn_find_id()" >ID 찾기
+                                        <button class="button w-100" type="button" id="fn_find_id" >ID 찾기
                                         </button>
                                     </td>
                                 </tr>
@@ -158,7 +148,7 @@
                                 </tr>
                                 <tr>
                                     <td align="center">
-                                        <button class="button w-100" type="submit" onclick="fn_find_pwd()">PW 찾기
+                                        <button class="button w-100" type="button" id="fn_find_pwd">PW 찾기
                                         </button>
                                     </td>
                                 </tr>

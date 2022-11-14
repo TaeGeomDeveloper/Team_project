@@ -168,6 +168,7 @@
             let phone = $("#mi_phone").val() + $("#mi_phone1").val() + $("#mi_phone2").val();
             let checkQualifiedNumber = $("#checkQualifiedNumber").val();
             let email = $("#mi_email").val() + $("#mi_email1").val();
+            let emailAddress = $("#mi_email1").val();
 
             if(id == ""){
                 alert("아이디를 입력해주세요");
@@ -239,6 +240,12 @@
                 return false;
             }
 
+            if(emailAddress == "none"){
+                alert("이메일 주소를 입력해주세요");
+                emailAddress.focus();
+                return false;
+            }
+
             SendPerson.method = "post";
             SendPerson.action = "./registProcess.do";
             SendPerson.submit();
@@ -283,7 +290,7 @@
                     <tr>
                         <th>ID</th>
                         <td>
-                            <input type="text" name="mi_id" id="mi_id" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                            <input type="text" name="mi_id" id="mi_id" maxlength="12" oninput="this.value = this.value.replace(/[^A-Za-z0-9]/g, '').replace(/(\..*)\./g, '$1');">
                             <input type="button" class="button" name="id_check" value="중복확인" id="idCheck">
                             <span id="msg" style="color:green"></span>
                             <span style="font-size: 8pt;">아이디는 영문+숫자 조합으로 6~12자리 사용해야 합니다.</span>
@@ -358,7 +365,7 @@
                         <th>일반전화</th>
                         <td>
                             <select name="mi_wireline" id="mi_wireline">
-                                <option value="기본값" selected="selected">--선택--</option>
+                                <option selected="selected" value="none">--선택--</option>
                                 <option value="031">031</option>
                                 <option value="032">032</option>
                                 <option value="033">033</option>
@@ -383,9 +390,9 @@
                     <tr>
                         <th>이메일주소</th>
                         <td>
-                            <input type="text" name="mi_email" id="mi_email"> @
+                            <input type="text" name="mi_email" id="mi_email" oninput="this.value = this.value.replace(/[^A-Za-z0-9]/g, '').replace(/(\..*)\./g, '$1');"> @
                             <select name="mi_email" id="mi_email1">
-                                <option value="기본값" selected="selected">--선택--</option>
+                                <option selected="selected" value="none">--선택--</option>
                                 <option value="@naver.com">naver.com</option>
                                 <option value="@daum.net">daum.net</option>
                                 <option value="@gmail.com">gmail.com</option>

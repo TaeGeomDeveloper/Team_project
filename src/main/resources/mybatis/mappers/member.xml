@@ -66,7 +66,7 @@
         ]]>
     </delete>
 
-    <select id="findMember" resultType="memberVO"  parameterType="java.util.Map" >
+    <select id="checkMember" resultType="memberVO"  parameterType="java.util.Map" >
       <![CDATA[
         select * from member_information
         where
