@@ -46,6 +46,7 @@ public class MemberController {
 		viewName= "/member/Login";
 		mav.setViewName(viewName);
 		csvService.insertDataTraditionalMarket();
+		csvService.insertDataFarmlandPrice();
 		return mav;
 	}
 	// 찾기

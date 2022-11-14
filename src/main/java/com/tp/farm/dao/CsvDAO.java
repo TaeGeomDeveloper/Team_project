@@ -1,6 +1,7 @@
 package com.tp.farm.dao;
 
 import com.tp.farm.utils.ConnectionManagerV2;
+import com.tp.farm.vo.FarmlandPriceVO;
 import com.tp.farm.vo.TraditionalMarketVO;
 import org.springframework.stereotype.Repository;
 
@@ -44,12 +45,38 @@ public class CsvDAO {
       return  flag;
   }
 
+  public boolean insertDataFarmlandPrice(ArrayList<FarmlandPriceVO> list) throws SQLException{
+      boolean flag = false;
+      Connection con = ConnectionManagerV2.getConnection();
+      String sql = "insert into market_price_farmland values(?,?,?,?,?,?,?)";
+      PreparedStatement pstmt = con.prepareStatement(sql);
+      int affectedCount = 0;
+      for(FarmlandPriceVO farmlandPrice : list){
+          pstmt.setInt(1, farmlandPrice.getMpf_idx());
+          pstmt.setString(2, farmlandPrice.getMpf_locationName());
+          pstmt.setString(3, farmlandPrice.getMpf_locationNameDetail());
+          pstmt.setInt(4, farmlandPrice.getMpf_lowestPrice());
+          pstmt.setInt(5, farmlandPrice.getMpf_maximumPrice());
+          pstmt.setInt(6, farmlandPrice.getMpf_averagePrice());
+          pstmt.setInt(7, farmlandPrice.getMpf_lieutenant());
+          affectedCount = pstmt.executeUpdate();
+      }
+      if (affectedCount>0){
+          System.out.println("FarmlandPrice data insert success");
+          flag = true;
+      }else{
+          System.out.println("FarmlandPrice data insert failed");
+      }
+      ConnectionManagerV2.closeConnection(null, pstmt, con);
+      return flag;
+  }
+
     public boolean deleteTraditionalMarketData() throws SQLException {
         boolean flag = false;
         //커넥션 취득
         Connection con = ConnectionManagerV2.getConnection();
         //쿼리 작성
-        String sql = "DELETE from traditional_market_information"; //전체 삭제할 시 쿼리문만 DELETE from gisa로 하면 됌
+        String sql = "DELETE from traditional_market_information";
         //쿼리 전송 통로 작성
         Statement stmt = con.createStatement();
         //쿼리 전송
@@ -63,5 +90,17 @@ public class CsvDAO {
         return flag;
     }
 
+    public boolean deleteFarmlandPriceData() throws  SQLException{
+      boolean flag = false;
+      Connection con = ConnectionManagerV2.getConnection();
+      String sql = "DELETE from market_price_farmland";
+      Statement stmt = con.createStatement();
+      int affectedCount = stmt.executeUpdate(sql);
+      if(affectedCount>0){
+          flag = true;
+      }
+      ConnectionManagerV2.closeConnection(null, stmt, con);
+      return flag;
+    }
 
 }
