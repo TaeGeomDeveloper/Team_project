@@ -64,10 +64,10 @@ public class BoardController {
     public ModelAndView readBoard(HttpServletRequest request, HttpServletResponse response) {
 
         ModelAndView mav = new ModelAndView();
-        String seq = request.getParameter("seq");
+        String cb_seq = request.getParameter("cb_seq");
         boolean flag = false;
-        BoardVO board = boardService.readBoard(seq);
-        List<ReplyVO> replyList = replyService.readAllReply(seq);
+        BoardVO board = boardService.readBoard(cb_seq);
+        List<ReplyVO> replyList = replyService.readAllReply(cb_seq);
         mav.addObject("board", board);
         mav.addObject("replyList", replyList);
         mav.setViewName("/board/CommnuityRead");
@@ -107,10 +107,10 @@ public class BoardController {
     @RequestMapping(value="/download.do", method=RequestMethod.GET)
     public ModelAndView download(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mav = new ModelAndView();
-        String seq = request.getParameter("seq");
+        String cb_seq = request.getParameter("cb_seq");
         String token = request.getParameter("token");
         try {
-            boolean flag = boardService.boardDownload(response, seq, token);
+            boolean flag = boardService.boardDownload(response, cb_seq, token);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -122,7 +122,8 @@ public class BoardController {
     public ModelAndView viewUpdate(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mav = new ModelAndView();
         String cb_seq = request.getParameter("cb_seq");
-        mav.addObject("cb_seq", cb_seq);
+        BoardVO board = boardService.readBoard(cb_seq);
+        mav.addObject("board", board);
         mav.setViewName("/board/updateTest");
         return mav;
     }
@@ -149,9 +150,9 @@ public class BoardController {
     @RequestMapping(value="/delete.do", method=RequestMethod.GET)
     public ModelAndView delete(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mav = new ModelAndView();
-        String seq = request.getParameter("seq");
+        String cb_seq = request.getParameter("cb_seq");
         boolean flag = false;
-        flag = boardService.deleteBoard(seq);
+        flag = boardService.deleteBoard(cb_seq);
         if(flag) {
             System.out.println("delete 완료");
         }

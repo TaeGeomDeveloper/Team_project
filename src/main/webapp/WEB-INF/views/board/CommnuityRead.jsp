@@ -57,7 +57,7 @@
                         <td>${board.mi_id}</td>
                         <td>${board.cb_regDate}</td>
                         <td>${board.cb_viewCount}</td>
-                        <td><a href="download.do?seq=${board.cb_seq}&token=on">
+                        <td><a href="download.do?cb_seq=${board.cb_seq}&token=on">
                             ${board.cb_originFileName}</a></td>
                         <td>${board.cb_downloadCount}</td>
                         <td><a href="viewUpdatePage.do?cb_seq=${board.cb_seq}">

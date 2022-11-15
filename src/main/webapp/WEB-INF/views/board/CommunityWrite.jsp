@@ -27,6 +27,10 @@
             }
     </script>
 
+    <style>
+        .dropdown-toggle::after { display: none; }
+    </style>
+
 </head>
 <body>
 
@@ -50,7 +54,7 @@
                         </tr>
                         <tr>
                             <th>내용</th>
-                            <td width="1000px"><textarea name="cb_content" id="cb_content" placeholder=""></textarea></td>
+                            <td width="1000px" ><textarea name="cb_content" id="cb_content" placeholder=""></textarea></td>
                         </tr>
                         <tr>
                             <th>첨부파일</th>
