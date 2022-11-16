@@ -82,10 +82,10 @@ public class BoardService {
         return list;
     }
 
-    public boolean boardDownload(HttpServletResponse response, String seq, String token) throws IOException {
+    public boolean boardDownload(HttpServletResponse response, String cb_seq, String token) throws IOException {
         boolean flag = false;
         //게시판 정보 레코드 얻기
-        BoardVO board = boardDAO.selectOneBoard(seq);
+        BoardVO board = boardDAO.selectOneBoard(cb_seq);
         String originFileName = board.getCb_originFileName();
         String serverFileName = board.getCb_serverFileName();
         //본래파일명 한글처리
@@ -111,15 +111,15 @@ public class BoardService {
         while((len=fis.read(buffer))!=-1) {
             os.write(buffer, 0, len);
         }
-        flag = boardDAO.updateCount(seq, token);
+        flag = boardDAO.updateDownloadCount(cb_seq, token);
         os.close();
         fis.close();
         return flag;
     }
 
-    public BoardVO readBoard(String seq) {
+    public BoardVO readBoard(String cb_seq) {
         BoardVO board = new BoardVO();
-        board = boardDAO.selectOneBoard(seq);
+        board = boardDAO.selectOneBoard(cb_seq);
         return board;
     }
 
@@ -136,9 +136,15 @@ public class BoardService {
         return flag;
     }
 
-    public boolean deleteBoard(String seq) {
+    public boolean deleteBoard(String cb_seq) {
         boolean flag = false;
-        flag = boardDAO.deleteOne(seq);
+        flag = boardDAO.deleteOne(cb_seq);
+        return flag;
+    }
+
+    public boolean readCount(String cb_seq) {
+        boolean flag = false;
+        flag = boardDAO.updateViewCount(cb_seq);
         return flag;
     }
 }
