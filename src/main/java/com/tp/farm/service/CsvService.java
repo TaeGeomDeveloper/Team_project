@@ -1,6 +1,7 @@
 package com.tp.farm.service;
 
 import com.tp.farm.dao.CsvDAO;
+import com.tp.farm.vo.CropDataVO;
 import com.tp.farm.vo.FarmlandPriceVO;
 import com.tp.farm.vo.TraditionalMarketVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,9 @@ public class CsvService {
     public void insertDataTraditionalMarket() throws SQLException, IOException {
         boolean flag = csvDAO.deleteTraditionalMarketData();
         if(flag){
-            System.out.println("전통시장 데이터 모두 삭제 완료");
+            //System.out.println("전통시장 데이터 모두 삭제 완료");
             csvDAO.insertDataTraditionalMarket(this.getTraditionalMarketData());
-            System.out.println("전통시장 데이터 모두 입력 완료");
+            //System.out.println("전통시장 데이터 모두 입력 완료");
         }
         //System.out.println(flag);
     }
@@ -33,9 +34,18 @@ public class CsvService {
     public void  insertDataFarmlandPrice() throws SQLException, IOException{
         boolean flag = csvDAO.deleteFarmlandPriceData();
         if(flag){
-            System.out.println("농지 시세 테이블 모두 삭제 완료");
+            //System.out.println("농지 시세 테이블 모두 삭제 완료");
             csvDAO.insertDataFarmlandPrice(this.getFarmlandPriceData());
-            System.out.println("농지 시세 테이블 모두 입력 완료");
+            //System.out.println("농지 시세 테이블 모두 입력 완료");
+        }
+    }
+
+    public void  insertCropData() throws SQLException, IOException{
+        boolean flag = csvDAO.deleteCropData();
+        if(flag){
+            //System.out.println("농지 시세 테이블 모두 삭제 완료");
+            csvDAO.insertDataCropData(this.getCropData());
+            //System.out.println("농지 시세 테이블 모두 입력 완료");
         }
     }
 
@@ -71,5 +81,22 @@ public class CsvService {
         fr.close();
         return list;
     }
+
+    public ArrayList<CropDataVO> getCropData() throws IOException{
+        ArrayList<CropDataVO> list = new ArrayList<>();
+        File file = new File("C:/dev/install/Project_base/농작물_자료조사표.csv");
+        FileReader fr =  new FileReader(file);
+        BufferedReader br = new BufferedReader(fr);
+        String line = null;
+        CropDataVO cropData = null;
+        while((line=br.readLine())!=null){
+            cropData = new CropDataVO(line);
+            list.add(cropData);
+        }
+        br.close();
+        fr.close();
+        return list;
+    }
+
 
 }

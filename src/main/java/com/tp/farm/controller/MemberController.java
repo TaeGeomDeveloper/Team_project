@@ -47,6 +47,7 @@ public class MemberController {
 		mav.setViewName(viewName);
 		csvService.insertDataTraditionalMarket();
 		csvService.insertDataFarmlandPrice();
+		csvService.insertCropData();
 		return mav;
 	}
 	// 찾기

@@ -1,6 +1,7 @@
 package com.tp.farm.dao;
 
 import com.tp.farm.utils.ConnectionManagerV2;
+import com.tp.farm.vo.CropDataVO;
 import com.tp.farm.vo.FarmlandPriceVO;
 import com.tp.farm.vo.TraditionalMarketVO;
 import org.springframework.stereotype.Repository;
@@ -71,6 +72,37 @@ public class CsvDAO {
       return flag;
   }
 
+    public boolean insertDataCropData(ArrayList<CropDataVO> list) throws SQLException{
+        boolean flag = false;
+        Connection con = ConnectionManagerV2.getConnection();
+        String sql = "insert into crop_data values(?,?,?,?,?,?,?,?,?,?,?)";
+        PreparedStatement pstmt = con.prepareStatement(sql);
+        int affectedCount = 0;
+        for(CropDataVO cropData : list){
+            pstmt.setInt(1, cropData.getCd_idx());
+            pstmt.setString(2, cropData.getCd_cropClassification());
+            pstmt.setString(3, cropData.getCd_cropName());
+            pstmt.setInt(4, cropData.getCd_operatingCost());
+            pstmt.setString(5, cropData.getCd_growthPeriodStart());
+            pstmt.setString(6, cropData.getCd_growthPeriodEnd());
+            pstmt.setString(7, cropData.getCd_harvestSeasonStart());
+            pstmt.setString(8, cropData.getCd_harvestSeasonEnd());
+            pstmt.setInt(9, cropData.getCd_income());
+            pstmt.setInt(10, cropData.getCd_marketValue());
+            pstmt.setString(11, cropData.getCd_insuranceStatus());
+            affectedCount = pstmt.executeUpdate();
+        }
+        if(affectedCount>0){
+            System.out.println("crop data insert success");
+            flag = true;
+        }else {
+            System.out.println("crop data insert failed");
+        }
+        ConnectionManagerV2.closeConnection(null, pstmt, con);
+
+        return  flag;
+    }
+
     public boolean deleteTraditionalMarketData() throws SQLException {
         boolean flag = false;
         //커넥션 취득
@@ -84,6 +116,7 @@ public class CsvDAO {
         //결과 처리
         if(affectedCount>0) {
             flag = true;
+            System.out.println("traditionalMarket data delete success");
         }
         //연결된 통로 모두 닫기
         ConnectionManagerV2.closeConnection(null, stmt, con);
@@ -98,9 +131,24 @@ public class CsvDAO {
       int affectedCount = stmt.executeUpdate(sql);
       if(affectedCount>0){
           flag = true;
+          System.out.println("farmlandPrice data delete success");
       }
       ConnectionManagerV2.closeConnection(null, stmt, con);
       return flag;
+    }
+
+    public boolean deleteCropData() throws  SQLException{
+        boolean flag = false;
+        Connection con = ConnectionManagerV2.getConnection();
+        String sql = "DELETE from crop_data";
+        Statement stmt = con.createStatement();
+        int affectedCount = stmt.executeUpdate(sql);
+        if(affectedCount>0){
+            flag = true;
+            System.out.println("crop data delete success");
+        }
+        ConnectionManagerV2.closeConnection(null, stmt, con);
+        return flag;
     }
 
 }
