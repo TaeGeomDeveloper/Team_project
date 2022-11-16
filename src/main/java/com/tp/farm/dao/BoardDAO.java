@@ -38,17 +38,14 @@ public class BoardDAO {
         return list;
     }
 
-
-    public boolean updateCount(String cb_seq, String token) {
+    public boolean updateDownloadCount(String cb_seq, String token) {
         boolean flag = false;
-        if(token=="on") {
-            int affectedCount = sqlSession.update("mapper.board.updateDownloadCount", cb_seq);
-            if (affectedCount > 0) {
-                System.out.println("다운로드 완료");
-                flag = true;
-            } else {
-                System.out.println("다운로드 실패");
-            }
+        int affectedCount = sqlSession.update("mapper.board.updateDownloadCount", cb_seq);
+        if (affectedCount > 0) {
+            System.out.println("다운로드 완료");
+            flag = true;
+        } else {
+            System.out.println("다운로드 실패");
         }
         return flag;
     }
@@ -73,6 +70,15 @@ public class BoardDAO {
     public boolean deleteOne(String cb_seq) {
         boolean flag = false;
         int affectedCount = sqlSession.delete("mapper.board.deleteOne", cb_seq);
+        if(affectedCount>0) {
+            flag = true;
+        }
+        return flag;
+    }
+
+    public boolean updateViewCount(String cb_seq) {
+        boolean flag = false;
+        int affectedCount = sqlSession.update("mapper.board.updateViewCount", cb_seq);
         if(affectedCount>0) {
             flag = true;
         }
