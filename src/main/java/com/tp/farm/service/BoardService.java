@@ -111,7 +111,7 @@ public class BoardService {
         while((len=fis.read(buffer))!=-1) {
             os.write(buffer, 0, len);
         }
-        flag = boardDAO.updateCount(cb_seq, token);
+        flag = boardDAO.updateDownloadCount(cb_seq, token);
         os.close();
         fis.close();
         return flag;
@@ -139,6 +139,12 @@ public class BoardService {
     public boolean deleteBoard(String cb_seq) {
         boolean flag = false;
         flag = boardDAO.deleteOne(cb_seq);
+        return flag;
+    }
+
+    public boolean readCount(String cb_seq) {
+        boolean flag = false;
+        flag = boardDAO.updateViewCount(cb_seq);
         return flag;
     }
 }

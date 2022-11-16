@@ -69,13 +69,23 @@
             		}
             	});
             }
+    </script>
 
-            function fn_click() {
-                var WriteForm = document.WriteForm;
-                WriteForm.method = "post";
-                WriteForm.action = "./createBoard.do";
-                WriteForm.submit();
-            }
+    <script>
+        function update_check(){
+            var updateForm = document.updateForm;
+            let cb_title = $("#cb_title").val();
+
+            if(cb_title == ""){
+                alert("제목를 입력해주세요");
+                cb_title.focus();
+                return false;
+            };
+
+            updateForm.method = "post";
+            updateForm.action = "./updateBoard.do";
+            updateForm.submit();
+        }
     </script>
 
     <style>
@@ -91,12 +101,12 @@
 
         <div id="Main_Box" align="center">
             <h1> 수정페이지 </h1>
-            <form name="SendPerson" enctype="multipart/form-data">
+            <form name="updateForm" enctype="multipart/form-data">
                 <table>
                     <tr>
                         <th>제목</th>
-                        <td><input type="text" name="cb_title" value="${board.cb_title}"></td>
-                        <td><input type="hidden" name="cb_seq" value="${cb_seq}"></td>
+                        <td><input type="text" name="cb_title" id="cb_title" value="${board.cb_title}"></td>
+                        <td><input type="hidden" name="cb_seq" value="${board.cb_seq}" ></td>
                     </tr>
                     <tr>
                         <th>내용</th>
@@ -107,8 +117,11 @@
                         <th>첨부파일</th> <td><input type="file" name="cb_attachedFile" >${cb_cb_originFileName}</td>
                     </tr>
                 </table>
-                <button class="button2" type="submit" onclick="fn_click()" >수정하기</button>
+                <div style="margin: auto">
+                    <button class="button2" type="button" onclick="update_check()" >수정하기</button>
+                </div>
             </form>
+
         </div>
 
     </article>

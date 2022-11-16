@@ -62,10 +62,10 @@ public class BoardController {
     //게시글 내용 페이지 - 이영록
     @RequestMapping(value="/ReadBoard.do", method=RequestMethod.GET)
     public ModelAndView readBoard(HttpServletRequest request, HttpServletResponse response) {
-
         ModelAndView mav = new ModelAndView();
         String cb_seq = request.getParameter("cb_seq");
         boolean flag = false;
+        flag = boardService.readCount(cb_seq);
         BoardVO board = boardService.readBoard(cb_seq);
         List<ReplyVO> replyList = replyService.readAllReply(cb_seq);
         mav.addObject("board", board);
@@ -141,9 +141,9 @@ public class BoardController {
             throw new RuntimeException(e);
         }
         if(flag) {
-            System.out.println("게시글 생성 완료");
+            System.out.println("게시글 수정 완료");
         }
-        mav.setViewName("redirect:./BoardList.do");
+        mav.setViewName("redirect:./ReadBoard.do?cb_seq=" + board.getCb_seq());
         return mav;
     }
 
@@ -163,10 +163,13 @@ public class BoardController {
     @RequestMapping(value="summerimages.do", method=RequestMethod.POST)
     public ResponseEntity<?> summerimage(@RequestParam("file") MultipartFile img, HttpServletRequest request) throws IOException {
         String path =  request.getSession().getServletContext().getRealPath("resources/upload");
+        //이미지 파일명 변경
         Random random = new Random();
         long currentTime = System.currentTimeMillis();
         int	randomValue = random.nextInt(100);
-        String fileName = Long.toString(currentTime) + "_" + randomValue + "_a_" + img.getOriginalFilename();
+        String imgName = img.getOriginalFilename();
+        String fileName = Long.toString(currentTime) + "-" + UUID.randomUUID().toString().substring(0,13) + imgName.substring(imgName.lastIndexOf("."));
+        //업로드
         File file = new File(path , fileName);
         img.transferTo(file);
         return ResponseEntity.ok().body("/smartfarm/resources/upload/"+fileName);
@@ -186,7 +189,7 @@ public class BoardController {
         } else {
             System.out.println("reply 실패");
         }
-        mav.setViewName("redirect:./ReadBoard.do?seq="+reply.getCb_seq());
+        mav.setViewName("redirect:./ReadBoard.do?cb_seq="+reply.getCb_seq());
         return mav;
     }
 
@@ -209,7 +212,7 @@ public class BoardController {
         } else {
             System.out.println("ReReply 실패");
         }
-        mav.setViewName("redirect:./ReadBoard.do?seq="+reply.getCb_seq());
+        mav.setViewName("redirect:./ReadBoard.do?cb_seq="+reply.getCb_seq());
         return mav;
     }
 
@@ -247,7 +250,7 @@ public class BoardController {
         if(flag) {
             System.out.println("삭제처리 완료");
         }
-        mav.setViewName("redirect:./ReadBoard.do?seq="+cbSeq);
+        mav.setViewName("redirect:./ReadBoard.do?cb_seq="+cbSeq);
         return mav;
     }
 
