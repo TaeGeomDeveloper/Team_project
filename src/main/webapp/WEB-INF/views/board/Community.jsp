@@ -28,7 +28,7 @@
 <section>
     <article>
         <div id="Main_Box" align="center" style="margin-top: 30px">
-            <h1> 쉼터 </h1>
+            <h1 style="font-size: 60px; margin-bottom: 30px"> 쉼터 </h1>
 
             <nav class="navbar" style="background-color: #7afacb; margin-top: 30px">
                 <div class="container-fluid">

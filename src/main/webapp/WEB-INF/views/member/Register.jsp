@@ -1,10 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
-  Created by IntelliJ IDEA.
-  User: User
-  Date: 2022-10-05
-  Time: 오후 2:38
-  To change this template use File | Settings | File Templates.
+  작성자 : 윤태검
+
+  일시 : 2022-11-17
+  내용 : 회원 가입 화면 수정.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
@@ -15,13 +14,12 @@
     <!-- 스타일시트 연결 -->
     <script src="http://code.jquery.com/jquery-latest.js"></script>
 
-
     <%-- 폰트 --%>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
     </style>
     <!-- 스타일시트 연결 -->
-    <link rel="stylesheet" href="../${contextPath}/resources/CSS/addrlinkSample.css" type="text/css"/>
+    <link rel="stylesheet" href="${contextPath}/resources/CSS/addrlinkSample.css" type="text/css"/>
 
     <script language="javascript">
         function goPopup() {
@@ -276,72 +274,85 @@
         });
     </script>
 
+    <style>
+        .form-control {
+            width: 200px;
+        }
+        th {
+            text-align: center;
+            color: black
+        }
+        section{
+            z-index: 0;
+        }
+    </style>
+
 
 </head>
 <body>
-
+    <img src="${contextPath}/resources/image/background/배경.jpg"alt="배경" width="100%" height="100%" style="z-index: -1;">
 <%--몸통--%>
 <section>
     <article>
 
         <div id="Main_Box" align="center" style="margin-top: 50px;">
-            <h1> 회원가입 </h1>
-            <form name="SendPerson" >
+            <h1 style="font-size: 60px"> 회원가입 </h1>
+            <form name="SendPerson" style=" width: 70%;padding: 20px; border-radius: 30px; margin-bottom: 20px; margin-top: 30px; background: #dcfaaa">
                 <input type="hidden" name="" id="isIdCheck" value="false">
                 <table>
                     <tr>
                         <th>ID</th>
-                        <td>
-                            <input type="text" name="mi_id" id="mi_id" maxlength="12" oninput="this.value = this.value.replace(/[^A-Za-z0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                        <td  class="d-flex p-2">
+                            <input class="form-control form-control" type="text" name="mi_id" id="mi_id" maxlength="12" oninput="this.value = this.value.replace(/[^A-Za-z0-9]/g, '').replace(/(\..*)\./g, '$1');">
                             <input type="button" class="button" name="id_check" value="중복확인" id="idCheck">
                             <span id="msg" style="color:green"></span>
-                            <span style="font-size: 8pt;">아이디는 영문+숫자 조합으로 6~12자리 사용해야 합니다.</span>
+                            <span style="font-size: 10pt;">아이디는 영문+숫자 조합으로 6~12자리 사용해야 합니다.</span>
                         </td>
                     </tr>
                     <tr>
                         <th>PWD</th>
-                        <td>
-                            <input type="password" name="mi_password" id="password_1">
+                        <td class="d-flex p-2">
+                            <input class="form-control form-control" type="password" name="mi_password" id="password_1">
                             <span id="rightPwd" style="display: none; color:green"></span>
                             <span id="unrightPwd" style="display: none; color:red"></span>
-                            <span style="font-size: 8pt;">비밀번호는 8자 이상이어야 하며, 숫자/대문자/소문자/특수문자를 모두 포함해야 합니다.</span>
+                            <span style="font-size: 10pt;">비밀번호는 8자 이상이어야 하며, 숫자/대문자/소문자/특수문자를 모두 포함해야 합니다.</span>
                         </td>
                     </tr>
                     <tr>
                         <th>비밀번호 확인</th>
                         <td>
-                            <input type="password" id="password_2" >
+                            <input class="form-control form-control" type="password" id="password_2" >
                             <span id="success" style="display: none;"></span>
                             <span id="fail" style="display: none; color: red"></span>
                         </td>
                     </tr>
                     <tr>
                         <th>이름</th>
-                        <td><input type="text" name="mi_name" id="mi_name"></td>
+                        <td><input class="form-control form-control" type="text" name="mi_name" id="mi_name"></td>
                     </tr>
                     <tr>
                         <th>주민등록번호</th>
-                        <td><input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="mi_regidentRegNumber" id="regNum1" maxlength="6"> -
-                            <input type="password" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="mi_regidentRegNumber" id="regNum2" maxlength="7">
+                        <td class="d-flex p-2"><input class="form-control form-control" type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="mi_regidentRegNumber" id="regNum1" maxlength="6"><span style="font-size: 20pt;"> - </span>
+                            <input class="form-control form-control" type="password" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="mi_regidentRegNumber" id="regNum2" maxlength="7">
                         </td>
                     </tr>
                     <div id="callBackDiv">
                         <input type="hidden"  style="width:500px;" id="roadFullAddr"  name="roadFullAddr" />
-                        <tr><th>도로명주소   </th><td><input type="text"  style="width:500px;" id="mi_address"  name="mi_address" readonly="readonly"/><button class="button" type="button" onClick="goPopup();">주소 찾기</button></td></tr>
-                        <tr><th>상세주소     </th><td><input type="text"  style="width:500px;" id="mi_addressDetail"  name="mi_addressDetail" readonly="readonly"/></td></tr>
+                        <tr><th>도로명주소   </th><td class="d-flex p-2"><input class="form-control form-control" type="text"  style="width:500px;" id="mi_address"  name="mi_address" readonly="readonly"/><button class="button" type="button" onClick="goPopup();">주소 찾기</button></td></tr>
+                        <tr><th>상세주소     </th><td><input class="form-control form-control" type="text"  style="width:500px;" id="mi_addressDetail"  name="mi_addressDetail" readonly="readonly"/></td></tr>
                         <input type="hidden"  style="width:500px;" id="roadAddrPart2"  name="roadAddrPart2" />
                         <input type="hidden"  style="width:500px;" id="engAddr"  name="engAddr" />
                         <input type="hidden"  style="width:500px;" id="jibunAddr"  name="jibunAddr" />
-                        <tr><th>우편번호     </th><td><input type="text"  style="width:100px;" id="mi_addressCode"  name="mi_addressCode" readonly="readonly" /></td></tr>
+                        <tr><th>우편번호     </th><td><input class="form-control form-control" type="text"  style="width:100px;" id="mi_addressCode"  name="mi_addressCode" readonly="readonly" /></td></tr>
                     </div>
                     <tr>
                         <th>휴대전화</th>
-                        <td>
-                            <select name="mi_phone"  id="mi_phone">
+                        <td class="d-flex p-2">
+                            <select class="form-select" style="width: 100px" name="mi_phone"  id="mi_phone">
                                 <option value="010" selected="selected">010</option>
-                            </select>-
-                            <input type="text" name="mi_phone" id="mi_phone1" maxlength="4" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/> -
-                            <input type="text" name="mi_phone" id="mi_phone2" maxlength="4" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+                            </select><span style="font-size: 20pt;"> - </span>
+                            <input class="form-control form-control" style="width:100px;" type="text" name="mi_phone" id="mi_phone1" maxlength="4" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/> <span style="font-size: 20pt;"> - </span>
+                            <input class="form-control form-control" style="width:100px;" type="text" name="mi_phone" id="mi_phone2" maxlength="4" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
                             <input type="button"
                                    id="sendSMS"
                                    class="button"
@@ -364,10 +375,10 @@
                         <td></td>
                     </tr>
                     <tr>
-                        <th>일반전화</th>
-                        <td>
-                            <select name="mi_wireline" id="mi_wireline">
-                                <option selected="selected" value="none">--선택--</option>
+                        <th >일반전화</th>
+                        <td class="d-flex p-2">
+                            <select class="form-select" style="width: 100px"  name="mi_wireline" id="mi_wireline">
+                                <option selected="selected" value="none">선택</option>
                                 <option value="031">031</option>
                                 <option value="032">032</option>
                                 <option value="033">033</option>
@@ -384,17 +395,17 @@
                                 <option value="062">062</option>
                                 <option value="063">063</option>
                                 <option value="064">064</option>
-                            </select> -
-                            <input type="text" name="mi_wireline" id="mi_wireline1" maxlength="3" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/> -
-                            <input type="text" name="mi_wireline" id="mi_wireline2" maxlength="4" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+                            </select><span style="font-size: 20pt;"> - </span>
+                            <input class="form-control form-control" style="width:100px;" type="text" name="mi_wireline" id="mi_wireline1" maxlength="3" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/><span style="font-size: 20pt;"> - </span>
+                            <input class="form-control form-control" style="width:100px;" type="text" name="mi_wireline" id="mi_wireline2" maxlength="4" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
                         </td>
                     </tr>
                     <tr>
                         <th>이메일주소</th>
-                        <td>
-                            <input type="text" name="mi_email" id="mi_email" oninput="this.value = this.value.replace(/[^A-Za-z0-9]/g, '').replace(/(\..*)\./g, '$1');"> @
-                            <select name="mi_email" id="mi_email1">
-                                <option selected="selected" value="none">--선택--</option>
+                        <td class="d-flex p-2">
+                            <input  class="form-control form-control" type="text" name="mi_email" id="mi_email" oninput="this.value = this.value.replace(/[^A-Za-z0-9]/g, '').replace(/(\..*)\./g, '$1');"><span style="font-size: 20pt;"> @ </span>
+                            <select class="form-select" style="width: 200px"  name="mi_email" id="mi_email1">
+                                <option selected="selected" value="none">선택</option>
                                 <option value="@naver.com">naver.com</option>
                                 <option value="@daum.net">daum.net</option>
                                 <option value="@gmail.com">gmail.com</option>

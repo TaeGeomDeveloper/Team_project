@@ -38,8 +38,9 @@
 <section>
     <article>
         <div id="Main_Box" align="center" style="margin-top: 30px">
+            <h1 style="font-size: 60px">쉼터</h1>
             <form name="WriteForm" enctype="multipart/form-data">
-                <div style="border: 10px solid #04AA6D; border-radius: 20px; width: 80%; margin-bottom: 20px">
+                <div style="border: 10px solid #04AA6D; border-radius: 20px; width: 80%; margin-bottom: 20px; margin-top: 30px;">
                     <table style="margin: 20px">
                         <tr>
                             <th>아이디</th>

@@ -1,8 +1,8 @@
 <!--
-    작성자 : 윤태검
-    내용 : 타일즈 Header 부분 과 네비
+작성자 : 윤태검
+내용 : 타일즈 Header 부분 과 네비
 
-    일시 : 2022.10.10 ~
+일시 : 2022.10.10 ~
 -->
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -58,6 +58,14 @@
             </c:otherwise>
         </c:choose>
     </nav>
+    <style>
+        @media all and (min-width: 992px) {
+            .navbar .nav-item .dropdown-menu{ display: none; }
+            .navbar .nav-item:hover .nav-link{   }
+            .navbar .nav-item:hover .dropdown-menu{ display: block; }
+            .navbar .nav-item .dropdown-menu{ margin-top:0; }
+        }
+    </style>
 
 </section>
 
@@ -83,7 +91,6 @@
                         </a>
                         <ul class="dropdown-menu gap-1 p-2 rounded-3 mx-0 shadow w-220px">
                             <li><a class="dropdown-item rounded-2 active" href="${contextPath}/notice/BoardList.do">공지사항</a></li>
-                            <li><a class="dropdown-item rounded-2" href="${contextPath}/board/BoardList.do">자유게시판</a></li>
                             <li><a class="dropdown-item rounded-2" href="${contextPath}/smartfarm/News.do">관련 뉴스</a></li>
                             <li><a class="dropdown-item rounded-2" href="${contextPath}/smartfarm/Support.do">농부 지원 사업</a></li>
                             <li><hr class="dropdown-divider"></li>
@@ -107,7 +114,13 @@
                         </ul>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="${contextPath}/board/BoardList.do">쉼터</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="${contextPath}/service/Job.do">알바</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="${contextPath}/service/Weather.do">날씨</a>
                     </li>
                     <c:choose>
                         <c:when test="${user != null}">
@@ -122,6 +135,7 @@
                                     <li><a class="dropdown-item rounded-2" href="${contextPath}/service/HowFarmer.do">귀농 절차</a></li>
                                     <li><a class="dropdown-item rounded-2" href="${contextPath}/service/Advice.do">전문가 상담/문의</a></li>
                                     <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item rounded-2" href="${contextPath}/service/Recruitment.do">일손 구하기</a></li>
                                     <li><a class="dropdown-item rounded-2" href="${contextPath}/service/AgriculturalSupplies.do">농업 용품</a></li>
                                 </ul>
                             </li>

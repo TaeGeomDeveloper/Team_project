@@ -10,11 +10,6 @@
     <!-- 스타일시트 연결 -->
     <script src="http://code.jquery.com/jquery-latest.js"></script>
 
-    <%-- 폰트 --%>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
-    </style>
-
     <script>
         $(document).ready(function () {
             $("#fn_login").on('click', function (event){
@@ -68,7 +63,7 @@
         <div id="Main_Box" align="center" style="margin-top: 50px">
             <form name="SendPerson">
                 <table class="c" align="center">
-                    <h1 style="text-align: center"> 로그인 </h1>
+                    <h1 style="text-align: center; font-size: 60px"> 로그인 </h1>
                     <tr>
                         <td class="form-floating w-80" align="center">
                             <input type="text" class="form-control" id="floatingInputID" placeholder="아이디" name="mi_id">
@@ -102,9 +97,6 @@
                                 <button class="button w-100" type="submit" onclick="fn_find()"> ID 또는 PW 찾기</button>
                             </a>
                         </td>
-                    </tr>
-                    <tr>
-                        <td class="mt-5 mb-3 text-muted">&copy; 2022 기가막히조</td>
                     </tr>
                 </table>
             </form>

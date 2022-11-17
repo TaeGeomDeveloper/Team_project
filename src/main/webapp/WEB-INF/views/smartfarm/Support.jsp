@@ -29,7 +29,7 @@
 <section>
     <article>
         <div id="Main_Box" align="center" style="margin-top: 30px; margin-bottom: 30px">
-            <h1> 지원 사업 </h1>
+            <h1 style="font-size: 60px; color: #4c68f5"> 지원 사업 </h1>
 
             <div class="container" style="margin-top: 30px">
 
@@ -47,15 +47,12 @@
                             </svg>
 
                             <div class="card-body">
-                                <p class="card-text">This is a wider card with supporting text below as a natural
-                                    lead-in to
-                                    additional content. This content is a little bit longer.</p>
+                                <p class="card-text">지원 사업 관련 내용이 간략하게 들어갑니다.</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary" style="width: 100px">View</button>
                                     </div>
-                                    <small class="text-muted">9 mins</small>
+                                    <small class="text-muted">2022 11 11</small>
                                 </div>
                             </div>
                         </div>
@@ -65,7 +62,7 @@
                 </div>
             </div>
 
-            <nav aria-label="Page navigation example">
+            <nav aria-label="Page navigation example" style="margin-top: 50px">
                 <ul class="pagination justify-content-center">
                     <li class="page-item disabled">
                         <a class="page-link" href="#" aria-label="Previous">
