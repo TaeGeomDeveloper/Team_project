@@ -1,3 +1,15 @@
+/*
+    작성자 : 윤태검
+    
+    귀농 지원 서비스 페이지
+
+    1) 알바 모집
+    2) 상담 문의
+    3) 작물 선택
+    4) 일손 구하기
+    5) 귀농 절차
+ */
+
 package com.tp.farm.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +31,15 @@ public class SvcController {
         mav.setViewName("Main");
         return mav;
     }
+    // 주산지 날씨 정보
+    @RequestMapping(value = "/Weather.do", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView Weather(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mav = new ModelAndView();
+        String viewName = this.getViewName(request);
+        viewName= "/service/Weather";
+        mav.setViewName(viewName);
+        return mav;
+    }
     // 알바 모집
     @RequestMapping(value = "/Job.do", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView Job(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -34,6 +55,15 @@ public class SvcController {
         ModelAndView mav = new ModelAndView();
         String viewName = this.getViewName(request);
         viewName= "/service/Advice";
+        mav.setViewName(viewName);
+        return mav;
+    }
+    // 일손 구하기
+    @RequestMapping(value = "/Recruitment.do", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView Recruitment(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mav = new ModelAndView();
+        String viewName = this.getViewName(request);
+        viewName= "/service/Recruitment";
         mav.setViewName(viewName);
         return mav;
     }

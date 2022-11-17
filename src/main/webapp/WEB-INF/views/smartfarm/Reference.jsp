@@ -15,19 +15,37 @@
 
     <!-- 스타일시트 연결 -->
     <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
 
     <%-- 폰트 --%>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
     </style>
 
+    <script>
+        $(document).ready(function () {
+            $('#table_Reference').DataTable();
+
+        });
+    </script>
+
     <style>
-        /*.p-2 {*/
-        /*  margin: 10px;*/
-        /*  border-radius: 20px;*/
-        /*  border: 2px solid #04AA6D;*/
-        /*  padding: 0px;*/
-        /*}*/
+        .button4 {
+            border-radius: 15px;
+            background-color: #f7dd7e;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .button4:hover {background-color: #f5c61b;}
     </style>
 
 </head>
@@ -36,51 +54,72 @@
 <%--몸통--%>
 <section>
     <article>
-        <div id="Main_Box" align="center" style="margin-top: 30px">
-            <h1> 자료실 </h1>
+        <div id="Main_Box" align="center" style="margin:auto; width: 90%">
+            <h1 class="Title" style=" color: #f7cc4a; margin-bottom: 30px;"> 자료실 </h1>
 
-            <div class="d-flex justify-content-center" style="width: 80%; text-align: center">
-                <table class="table" style="margin-top: 30px">
-                    <thead>
-                    <tr class="table-success">
-                        <th scope="col" style="width: 5%">번호</th>
-                        <th scope="col" style="width: 60%">제목</th>
-                        <th scope="col" style="width: 10%">작성자</th>
-                        <th scope="col" style="width: 15%">등록일</th>
-                        <th scope="col" style="width: 10%">조회수</th>
+            <%-- 자료실 현황 --%>
+            <table id="table_Reference" class="table table-striped table-bordered" style="width:100%;">
+                <thead style="background-color: #f7cc4a">
+                <tr>
+                    <th>글번호</th>
+                    <th style="width: 40%">제목</th>
+                    <th>작성자</th>
+                    <th>등록일</th>
+                    <th>조회수</th>
+                    <th>변경 버튼</th>
+                    <th>삭제 버튼</th>
+                    <th>첨부파일</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach var="i" begin="0" end="15">
+                    <tr>
+                        <td>${i}</td>
+                        <td> 제목 ${i}</td>
+                        <td>김 모씨</td>
+                        <td>2022-11-11</td>
+                        <td>0</td>
+                        <td>
+                            <button class="button4">변경</button>
+                        </td>
+                        <td>
+                            <button class="button4">삭제</button>
+                        </td>
+                        <td>
+                            <button class="button4">첨부파일</button>
+                        </td>
                     </tr>
-                    </thead>
-                    <tbody class="table-group-divider">
-                    <c:forEach var="i" begin="1" end="15">
-                        <tr>
-                            <th scope="row">${i}</th>
-                            <td>제목 ${i}</td>
-                            <td>작성자 ${i}</td>
-                            <td>2022.10.24</td>
-                            <td>100</td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-            </div>
-
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+                    <tr>
+                        <td>${i}</td>
+                        <td> 상담 리스트 ${i}</td>
+                        <td>윤 모씨</td>
+                        <td>2022-11-11</td>
+                        <td>0</td>
+                        <td>
+                            <button class="button4">변경</button>
+                        </td>
+                        <td>
+                            <button class="button4">삭제</button>
+                        </td>
+                        <td>
+                            <button class="button4">첨부파일</button>
+                        </td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th>글번호</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>등록일</th>
+                    <th>조회수</th>
+                    <th>변경 버튼</th>
+                    <th>삭제 버튼</th>
+                    <th>첨부파일</th>
+                </tr>
+                </tfoot>
+            </table>
 
         </div>
     </article>

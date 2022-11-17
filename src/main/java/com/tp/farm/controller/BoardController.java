@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
-
 /*
         작성자 : 이영록
         내용 : 자유게시판 작성
@@ -143,7 +142,7 @@ public class BoardController {
         if(flag) {
             System.out.println("게시글 생성 완료");
         }
-        mav.setViewName("redirect:./BoardList.do");
+        mav.setViewName("redirect:./ReadBoard.do?cb_seq=" + board.getCb_seq());
         return mav;
     }
 
@@ -163,10 +162,13 @@ public class BoardController {
     @RequestMapping(value="summerimages.do", method=RequestMethod.POST)
     public ResponseEntity<?> summerimage(@RequestParam("file") MultipartFile img, HttpServletRequest request) throws IOException {
         String path =  request.getSession().getServletContext().getRealPath("resources/upload");
+        //이미지 파일명 변경
         Random random = new Random();
         long currentTime = System.currentTimeMillis();
-        int	randomValue = random.nextInt(100);
-        String fileName = Long.toString(currentTime) + "_" + randomValue + "_a_" + img.getOriginalFilename();
+        int   randomValue = random.nextInt(100);
+        String imgName = img.getOriginalFilename();
+        String fileName = Long.toString(currentTime) + "-" + UUID.randomUUID().toString().substring(0,13) + imgName.substring(imgName.lastIndexOf("."));
+        //업로드
         File file = new File(path , fileName);
         img.transferTo(file);
         return ResponseEntity.ok().body("/smartfarm/resources/upload/"+fileName);

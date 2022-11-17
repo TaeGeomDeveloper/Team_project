@@ -64,19 +64,14 @@
         /*  border: 0px solid #bcbcbc;*/
         /*  font-size:10px;*/
         /*}*/
-        /*#content {*/
-        /*  width: 75%;*/
-        /*  padding: 5px;*/
-        /*  margin-right: 5px;*/
-        /*  float: left;*/
-        /*  border: 0px solid #bcbcbc;*/
-        /*}*/
-        /*#footer {*/
-        /*  clear: both;*/
-        /*  padding: 5px;*/
-        /*  border: 0px solid #bcbcbc;*/
-        /*   background-color: lightblue;*/
-        /*}*/
+        #content {
+          /*position: sticky;*/
+        }
+        #footer {
+          position: relative;
+            bottom: 0px;
+          z-index: 3;
+        }
     </style>
 
     <title><tiles:insertAttribute name="title"/></title>

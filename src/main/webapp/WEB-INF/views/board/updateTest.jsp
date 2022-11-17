@@ -12,8 +12,7 @@
     <link rel="stylesheet" href="${contextPath}/resources/summernote/css/summernote-lite.css">
 
     <script>
-            $(document).ready(function()
-            	{
+            $(document).ready(function() {
             	    var fontSizes = [ '8', '9', '10', '11', '12', '14','16', '18', '20', '22', '24', '28', '30', '36', '50', '72','100' ];
             		var fontNames = [ '맑은 고딕', '궁서', '굴림체', '굴림', '바탕체', 'Arial', 'Arial Black','Comic Sans MS', 'Courier New' ];
             		var toolbar = [[ 'fontname', [ 'fontname' ] ],
@@ -46,7 +45,7 @@
                         }
                     };
 
-                    $('#cb_content').val('${fn:replace(board.cb_content,"\'","\\'")}');
+                    $('#cb_content').val('${fn:replace(board.cb_content,"\'","\ \'")}');
                     $('#cb_content').summernote(setting);
                     $('#cb_content').summernote('fontName', '맑은 고딕');
             });
@@ -68,13 +67,15 @@
             			});
             		}
             	});
-            }
+            };
+    </script>
 
+    <script>
             function fn_click() {
-                var WriteForm = document.WriteForm;
-                WriteForm.method = "post";
-                WriteForm.action = "./createBoard.do";
-                WriteForm.submit();
+                var updateForm = document.updateForm;
+                updateForm.method = "post";
+                updateForm.action = "./updateBoard.do";
+                updateForm.submit();
             }
     </script>
 
@@ -91,12 +92,12 @@
 
         <div id="Main_Box" align="center">
             <h1> 수정페이지 </h1>
-            <form name="SendPerson" enctype="multipart/form-data">
+            <form name="updateForm" enctype="multipart/form-data">
                 <table>
                     <tr>
                         <th>제목</th>
                         <td><input type="text" name="cb_title" value="${board.cb_title}"></td>
-                        <td><input type="hidden" name="cb_seq" value="${cb_seq}"></td>
+                        <td><input type="hidden" name="cb_seq" value="${board.cb_seq}" ></td>
                     </tr>
                     <tr>
                         <th>내용</th>
@@ -107,8 +108,11 @@
                         <th>첨부파일</th> <td><input type="file" name="cb_attachedFile" >${cb_cb_originFileName}</td>
                     </tr>
                 </table>
-                <button class="button2" type="submit" onclick="fn_click()" >수정하기</button>
             </form>
+
+            <div style="margin: auto">
+                <button class="button2" type="submit" onclick="fn_click()" >수정하기</button>
+            </div>
         </div>
 
     </article>

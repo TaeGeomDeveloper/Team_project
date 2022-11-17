@@ -97,27 +97,20 @@ li a {
     text-decoration: none;
 }
 
+.Title {
+    font-size: 60px;
+    margin-top: 50px;
+}
+
 .main {
     z-index: 0;
 }
 
 /*메인 네비게이터*/
 
-/*li a:hover:not(.active) {*/
-/*    background-color: #111;*/
-/*}*/
-
 #Main_Box {
-    padding: 25px;
-}
 
-/* Style the footer */
-/*footer {*/
-/*    background-color: darkslategray;*/
-/*    padding: 60px;*/
-/*    text-align: center;*/
-/*    color: white;*/
-/*}*/
+}
 
 .button {
     border-radius: 15px;

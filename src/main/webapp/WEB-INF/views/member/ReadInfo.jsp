@@ -5,7 +5,9 @@
   Time: 오후 2:38
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
     <title>ReadInfo</title>
@@ -26,6 +28,7 @@
             updateForm.action = "ReadInfo.do?mi_id=${member.mi_id}&mode=u";
             updateForm.submit();
         }
+
         function fn_Update() {
             var updateMember = document.updateMember;
 
@@ -34,7 +37,33 @@
             updateMember.submit();
         }
     </script>
+    <style>
+        body {
+            position: relative;
+        }
 
+        #MB {
+            width: 100%;
+            position: absolute;
+            z-index: 2;
+        }
+
+        #BG {
+            position: absolute;
+            z-index: 1;
+        }
+
+        #footer{
+            bottom: -1000px;
+        }
+        th {
+            text-align: center;
+            background: #aeed9d;
+            border-radius: 100px;
+            max-width: 100px;
+            min-width: 100px;
+        }
+    </style>
 </head>
 <body>
 
@@ -47,7 +76,7 @@
             "border-top:0px;" +
             "border-left:0px;" +
             "border-bottom:0px";
-    MemberVO member = (MemberVO)request.getAttribute("member");
+    MemberVO member = (MemberVO) request.getAttribute("member");
     String mbId = member.getMi_id();
 %>
 
@@ -55,112 +84,143 @@
 <section>
     <article>
 
-        <div id="Main_Box" align="center" style="margin-top: 50px">
-            <h1 style="text-align: center"> 회원정보 </h1>
-            <%--            <form action="UpdateMember.do?id=${member.id}&mode=r" method="post">--%>
-            <%
+        <div id="Main_Box" align="center">
+            <div id="MB" style="margin-top: 50px">
+                <h1><h1 style="text-align: center;font-size: 60px"> 회원정보 </h1>
+                    <%--            <form action="UpdateMember.do?id=${member.id}&mode=r" method="post">--%>
+                        <%
                 if(mode.equals("r")){
             %>
-            <form name="updateForm">
-                    <%
+                    <form name="updateForm">
+                            <%
             } else if(mode.equals("u")){%>
-                <form name="updateMember">
-                    <%}%>
-                    <table id="list_table" style="margin-bottom: 20px">
-                        <tr>
-                            <th>아이디</th>
-                            <td>
-                                <input type="text" value="${member.mi_id}" name="" readonly="readonly" style="border: none;"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>비밀번호</th>
-                            <td>
-                                <input type="password" value="${member.mi_password}" name="mi_password" <%if(mode.equals("r")){
-                                    out.print(read_only+" ");
-                                    out.print("style="+border_none);
-                                }%>/>
-                            </td>
-                            <th>이메일</th>
-                            <td>
-                                <input type="text" value="${member.mi_email}" name="mi_email" <%if(mode.equals("r")){
-                                    out.print(read_only+" ");
-                                    out.print("style="+border_none);
-                                }%>/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>이름</th>
-                            <td>
-                                <input type="text" value="${member.mi_name}" <%if(mode.equals("r")){
-                                    out.print(read_only+" ");
-                                    out.print("style="+border_none);
-                                }%>/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>주민등록번호</th>
-                            <td>
-                                <input type="text" value="${member.mi_regidentRegNumber}" readonly="readonly" style="border: none;"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>휴대 전화</th>
-                            <td>
-                                <input type="text" value="${member.mi_phone}" name="mi_phone" <%if(mode.equals("r")){
-                                    out.print(read_only+" ");
-                                    out.print("style="+border_none);
-                                }%>/>
-                            </td>
-                            <th>주소</th>
-                            <td>
-                                <input type="text" style="width:500px;" value="${member.mi_address}" name="mi_address" <%if(mode.equals("r")){
-                                    out.print(read_only+" ");
-                                    out.print("style="+border_none);
-                                }%>/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>일반 전화</th>
-                            <td>
-                                <input type="text" value="${member.mi_wireline}" name="mi_wireline" <%if(mode.equals("r")){
-                                    out.print(read_only+" ");
-                                    out.print("style="+border_none);
-                                }%>/>
-                            </td>
-                            <th>상세 주소</th>
-                            <td>
-                                <input type="text" style="width:500px;" value="${member.mi_addressDetail}" name="mi_addressDetail" <%if(mode.equals("r")){
-                                    out.print(read_only+" ");
-                                    out.print("style="+border_none);
-                                }%>/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>가입 날짜</th>
-                            <td> <input type="text" value="${member.mi_joinDate}" readonly="readonly" style="border: none;"/> </td>
-                            <th>우편번호</th>
-                            <td>
-                                <input type="text" style="width:100px;" value="${member.mi_addressCode}" name="mi_addressCode"<%if(mode.equals("r")){
-                                    out.print(read_only+" ");
-                                    out.print("style="+border_none);
-                                }%>/>
-                            </td>
-                        </tr>
-                    </table>
-                    <%
-                        if(mode.equals("r")){
-                            out.print("<button class='button2' onclick='fn_updateForm()'> 수정 하기 </button>");
-                        } else if(mode.equals("u")){
-                            out.print("<button class='button2' onclick='fn_Update()'> 수정 완료 </button>");
-                        }
-                    %>
-                </form>
-                        <a href="deleteMember.do?mi_id=${member.mi_id}" style="text-decoration:none"> <button class="button2">회원 탈퇴</button></a>
-        </div>
+                        <form name="updateMember">
+                            <%}%>
+                            <div style="width: 70%; padding: 20px">
+                                <table id="list_table" style="margin-bottom: 20px;">
+                                    <tr>
+                                        <th>아이디</th>
+                                        <td>
+                                            <input class="form-control form-control" type="text" value="${member.mi_id}" name="" readonly="readonly"
+                                                   style="border: none;"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>비밀번호</th>
+                                        <td>
+                                            <input class="form-control form-control" type="password" value="${member.mi_password}" name="mi_password" <%
+                                                if (mode.equals("r")) {
+                                                    out.print(read_only + " ");
+                                                    out.print("style=" + border_none);
+                                                }
+                                            %>/>
+                                        </td>
+                                        <th>이메일</th>
+                                        <td>
+                                            <input class="form-control form-control" type="text" value="${member.mi_email}" name="mi_email" <%
+                                                if (mode.equals("r")) {
+                                                    out.print(read_only + " ");
+                                                    out.print("style=" + border_none);
+                                                }
+                                            %>/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>이름</th>
+                                        <td>
+                                            <input class="form-control form-control" type="text" value="${member.mi_name}" <%
+                                                if (mode.equals("r")) {
+                                                    out.print(read_only + " ");
+                                                    out.print("style=" + border_none);
+                                                }
+                                            %>/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>주민등록번호</th>
+                                        <td>
+                                            <input class="form-control form-control" type="text" value="${member.mi_regidentRegNumber}"
+                                                   readonly="readonly"
+                                                   style="border: none;"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>휴대 전화</th>
+                                        <td>
+                                            <input class="form-control form-control" type="text" value="${member.mi_phone}" name="mi_phone" <%
+                                                if (mode.equals("r")) {
+                                                    out.print(read_only + " ");
+                                                    out.print("style=" + border_none);
+                                                }
+                                            %>/>
+                                        </td>
+                                        <th>주소</th>
+                                        <td>
+                                            <input class="form-control form-control" type="text" style="width:400px;" value="${member.mi_address}"
+                                                   name="mi_address" <%
+                                                if (mode.equals("r")) {
+                                                    out.print(read_only + " ");
+                                                    out.print("style=" + border_none);
+                                                }
+                                            %>/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>일반 전화</th>
+                                        <td>
+                                            <input class="form-control form-control" type="text" value="${member.mi_wireline}" name="mi_wireline" <%
+                                                if (mode.equals("r")) {
+                                                    out.print(read_only + " ");
+                                                    out.print("style=" + border_none);
+                                                }
+                                            %>/>
+                                        </td>
+                                        <th>상세 주소</th>
+                                        <td>
+                                            <input class="form-control form-control" type="text" style="width:400px;" value="${member.mi_addressDetail}"
+                                                   name="mi_addressDetail" <%
+                                                if (mode.equals("r")) {
+                                                    out.print(read_only + " ");
+                                                    out.print("style=" + border_none);
+                                                }
+                                            %>/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>가입 날짜</th>
+                                        <td><input class="form-control form-control" type="text" value="${member.mi_joinDate}" readonly="readonly"
+                                                   style="border: none;"/></td>
+                                        <th>우편번호</th>
+                                        <td>
+                                            <input class="form-control form-control" type="text" style="width:100px;" value="${member.mi_addressCode}"
+                                                   name="mi_addressCode"<%
+                                                if (mode.equals("r")) {
+                                                    out.print(read_only + " ");
+                                                    out.print("style=" + border_none);
+                                                }
+                                            %>/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
 
+                            <%
+                                if (mode.equals("r")) {
+                                    out.print("<button class='button2' onclick='fn_updateForm()'> 수정 하기 </button>");
+                                } else if (mode.equals("u")) {
+                                    out.print("<button class='button2' onclick='fn_Update()'> 수정 완료 </button>");
+                                }
+                            %>
+                        </form>
+                        <a href="deleteMember.do?mi_id=${member.mi_id}" style="text-decoration:none">
+                            <button class="button2">회원 탈퇴</button>
+                        </a>
+            </div>
+        </div>
     </article>
 </section>
-
+<div id="BG">
+    <img src="${contextPath}/resources/image/background/배경.jpg" alt="배경" style="height: 100%; width: 100%">
+</div>
 </body>
 </html>

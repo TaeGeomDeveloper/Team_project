@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: User
@@ -6,6 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
     <title>Main</title>
@@ -53,7 +55,7 @@
                 $.ajax({
                     type : 'get',
                     dataType : 'text',
-                    url : "/smartfarm/member/idCheck.do",
+                    url : "${contextPath}/member/idCheck.do",
                     data : {mi_id : memberId},
                     success : function (data, status) {
                         //alert(data);
@@ -407,7 +409,7 @@
                         <td><input type="hidden" name="mi_joinDate"></td>
                     </tr>
                 </table>
-                <button class="button2" onclick="joinform_check();" id="validate" >가입 하기</button>
+                <button class="button2" type="button" onclick="joinform_check();" id="validate" >가입 하기</button>
             </form>
         </div>
 

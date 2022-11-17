@@ -57,7 +57,7 @@
                         <td>${board.mi_id}</td>
                         <td>${board.cb_regDate}</td>
                         <td>${board.cb_viewCount}</td>
-                        <td><a href="download.do?seq=${board.cb_seq}&token=on">
+                        <td><a href="download.do?cb_seq=${board.cb_seq}&token=on">
                             ${board.cb_originFileName}</a></td>
                         <td>${board.cb_downloadCount}</td>
                         <td><a href="viewUpdatePage.do?cb_seq=${board.cb_seq}">
@@ -67,7 +67,7 @@
                     </tbody>
                 </table>
             </div>
-            <div style="width: 80%; border: 5px solid #04AA6D; border-radius: 20px; height: 700px">
+            <div style="width: 80%; border: 5px solid #04AA6D; border-radius: 20px; height: 700px; text-align: left">
                 ${board.cb_content}
             </div>
 

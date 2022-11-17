@@ -30,16 +30,23 @@
     <style>
         .dropdown-toggle::after { display: none; }
     </style>
-
+    <style>
+        th{
+            text-align: center;
+            max-width: 100px;
+            min-width: 100px;
+        }
+    </style>
 </head>
 <body>
 
 <%--몸통--%>
 <section>
     <article>
-        <div id="Main_Box" align="center" style="margin-top: 30px">
+        <div id="Main_Box" align="center" style="margin: auto; width: 90%">
+            <h1 class="Title">쉼터</h1>
             <form name="WriteForm" enctype="multipart/form-data">
-                <div style="border: 10px solid #04AA6D; border-radius: 20px; width: 80%; margin-bottom: 20px">
+                <div style="border: 10px solid #04AA6D; border-radius: 20px; margin-bottom: 20px; margin-top: 30px;">
                     <table style="margin: 20px">
                         <tr>
                             <th>아이디</th>

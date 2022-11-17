@@ -6,12 +6,11 @@
 <head>
   <title>Insert</title>
 
-  <!-- Smart editor -->
-  <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-  <script type="text/javascript" src="${contextPath}/resources/smarteditor/js/HuskyEZCreator.js"
-          charset="utf-8"></script>
-  <script type="text/javascript" src="${contextPath}/resources/JS/writeForm.js" charset="utf-8"></script>
-  <%--    <script type="text/javascript" charset="utf-8" src="<c:url value="${contextPath}/resources/JS/writeForm.js"/>"></script>--%>
+  <%-- summernote 라이브러리 추가 --%>
+  <script type="text/javascript" src="${contextPath}/resources/summernote/js/summernote-lite.js" charset="UTF-8"></script>
+  <script type="text/javascript" src="${contextPath}/resources/summernote/lang/summernote-ko-KR.js" charset="UTF-8"></script>
+  <link rel="stylesheet" href="${contextPath}/resources/summernote/css/summernote-lite.css">
+  <script type="text/javascript" src="${contextPath}/resources/summernote/js/summernoteFunction.js" charset="UTF-8"></script>
 
   <script>
     function fn_click() {
@@ -22,7 +21,13 @@
       WriteForm.submit();
     }
   </script>
-
+  <style>
+    th{
+      text-align: center;
+      max-width: 100px;
+      min-width: 100px;
+    }
+  </style>
 
 </head>
 <body>
@@ -30,9 +35,10 @@
 <%--몸통--%>
 <section>
   <article>
-    <div id="Main_Box" align="center" style="margin-top: 30px">
+    <div id="Main_Box" align="center" style="width: 90%; margin:auto;">
+      <h1 style="font-size: 60px; color: #f58e45; margin-top: 50px;"> 공지사항 </h1>
       <form name="WriteForm" id="frm" enctype="multipart/form-data">
-        <div style="border: 10px solid #04AA6D; border-radius: 20px; width: 80%; margin-bottom: 20px">
+        <div style="border: 10px solid #f7a063; border-radius: 20px; margin-bottom: 20px; margin-top: 30px;">
           <table style="margin: 20px">
             <tr>
               <th>아이디</th>

@@ -33,10 +33,10 @@
 <%--몸통--%>
 <section>
     <article>
-        <div id="Main_Box" align="center" style="margin-top: 30px">
-            <h1> 게시글 </h1>
+        <div id="Main_Box" align="center" style="width: 90%; margin:auto;">
+            <h1 class="Title"> 게시글 </h1>
 
-            <div class="d-flex justify-content-center" style="width: 80%; text-align: center; ">
+            <div class="d-flex justify-content-center" style="text-align: center; ">
                 <table class="table align-middle" style="margin-top: 30px;  border: 5px solid #04AA6D;">
                     <thead>
                     <tr class="table-success">
@@ -67,12 +67,12 @@
                     </tbody>
                 </table>
             </div>
-            <div style="width: 80%; border: 5px solid #04AA6D; border-radius: 20px; height: 700px; text-align: left">
+            <div style="border: 5px solid #04AA6D; border-radius: 20px; height: 700px; text-align: left">
                 ${board.cb_content}
             </div>
 
             <%--댓글--%>
-            <div class="d-flex justify-content-center" style="width: 80%; text-align: center;">
+            <div class="d-flex justify-content-center" style=" text-align: center;">
                 <table class="table align-middle" style="margin-top: 30px; border: 5px solid #04AA6D;">
                     <thead>
                     <tr class="table-warning">
@@ -203,24 +203,6 @@
                 <button type="submit" class="button2">댓글등록</button>
             </form>
         </div>
-
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
 
     </article>
 </section>

@@ -1,10 +1,9 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: User
-  Date: 2022-10-05
-  Time: 오후 2:38
-  To change this template use File | Settings | File Templates.
---%>
+<!--
+작성자 : 윤태검
+내용 : 임시  Board
+
+일시 : 2022.10.10 ~
+-->
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
@@ -18,7 +17,7 @@
 
     <%-- 폰트 --%>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap'); /* 수정 연습 */
     </style>
 
     <style>

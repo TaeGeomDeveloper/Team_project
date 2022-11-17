@@ -1,4 +1,3 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
@@ -10,13 +9,24 @@
     <!-- 스타일시트 & 스크립트 연결 -->
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="${contextPath}/resources/CSS/Farm.css" type="text/css" />
+    <link rel="stylesheet" href="${contextPath}/resources/CSS/Farm.css" type="text/css"/>
 
     <%-- 차트 --%>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
     <script src="${contextPath}/resources/JSON/Farm2.json"></script>
     <script src="${contextPath}/resources/JS/Farm.js"></script>
+
+    <style>
+        .WForm {
+            font-size: 24px;
+            margin-bottom: 6px;
+        }
+
+        .h2_selector {
+            margin-top: 60px;
+        }
+    </style>
 
 </head>
 <body>
@@ -29,33 +39,108 @@
             <div class="p-5 mb-4 bg-light rounded-3">
                 <div class="container-fluid py-0">
                     <h1 class="display-5 fw-bold">작물 선택</h1>
-                    <p class="col-md-8 fs-4"> 자신의 여건과 적성, 기술수준, 자본능력 등에 적합한 작물을 신중하게 선택해야 합니다. <br/>
-                        지역 특산물을 우선 (지역의 자금 지원,기술 지원)<br/>
-                        지역 환경 고려<br/>
-                        귀농에 따른 생각에 따라 달라질수 있다.<br/>
-                        교육 기관에서 어떤 작목을 배웠느냐도 결정요소가 된다.
+                    <p class="col-md-8 fs-4"><br/>
+                        자신의 여건과 적성, 기술수준, 자본능력 등에 적합한 작물을 신중하게 선택해야 합니다.<br/>
+                        지역 환경 고려 하고 지역 특산물을 우선 하는게 좋습니다.<br/>
                     </p>
 
-                    <form>
-                        <div style="width: 20%">
-                            지역
-                            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                                <option selected>전체</option>
-                                <option value="1">경상북도</option>
-                                <option value="2">경상남도</option>
-                                <option value="3">전라도</option>
-                            </select>
-                            기술수준
-                            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                                <option selected>없음</option>
-                                <option value="1">초보자</option>
-                                <option value="2">중수</option>
-                                <option value="3">고수</option>
-                            </select>
+                    <form style="padding: 20px; border-radius: 25px; margin-bottom: 20px; margin-top: 50px">
+                        <h2>본인 정보입력(필수)</h2>
+                        <hr class="featurette-divider" style="border-top: 8px solid">
+                        <div class="d-flex justify-content-center">
+                            <div style="width: 25%; padding: 20px">
+                                <input class="form-control form-control-lg" type="text" placeholder="이름">
+                            </div>
+                            <div style="width: 25%; padding: 20px">
+                                <input class="form-control form-control-lg" type="text" placeholder="나이">
+                            </div>
+                            <div style="width: 25%; padding: 20px">
+                                <select class="form-select form-select-lg mb-3">
+                                    <option selected>성별</option>
+                                    <option value="1">남자</option>
+                                    <option value="2">여자</option>
+                                </select>
+                            </div>
                         </div>
+                        <hr class="featurette-divider">
+                        <h2 class="h2_selector">귀농 희망지역(선택)</h2>
+                        <hr class="featurette-divider" style="border-top: 8px solid">
+                        <div class="d-flex justify-content-center">
+                            <div style="width: 30%; padding: 20px">
+                                <p class="WForm">지역</p>
+                                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                    <option selected>전체</option>
+                                    <option value="1">강원도</option>
+                                    <option value="2">경기도</option>
+                                    <option value="3">충청북도</option>
+                                    <option value="4">충청남도</option>
+                                    <option value="5">경상북도</option>
+                                    <option value="6">경상남도</option>
+                                    <option value="7">전라북도</option>
+                                    <option value="8">전라남도</option>
+                                </select>
+                            </div>
+                        </div>
+                        <hr class="featurette-divider">
+                        <h2 class="h2_selector">작물 분류(선택)</h2>
+                        <hr class="featurette-divider" style="border-top: 8px solid">
+                        <div class="d-flex justify-content-center">
+                            <div style="width: 25%; padding: 20px">
+                                <p class="WForm">작물분류</p>
+                                <select class="form-select form-select-lg mb-3">
+                                    <option selected>전체</option>
+                                    <option value="1">과일</option>
+                                    <option value="2">채소</option>
+                                </select>
+                            </div>
+                            <div style="width: 25%; padding: 20px">
+                                <p class="WForm">재배 방법</p>
+                                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                    <option selected>전체</option>
+                                    <option value="1">노지</option>
+                                    <option value="2">비닐하우스</option>
+                                </select>
+                            </div>
+                            <div style="width: 25%; padding: 20px">
+                                <p class="WForm">수학 시기</p>
+                                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                    <option selected>계절</option>
+                                    <option value="1">봄</option>
+                                    <option value="2">여름</option>
+                                    <option value="3">가을</option>
+                                    <option value="4">겨울</option>
+                                </select>
+                            </div>
+                        </div>
+                        <hr class="featurette-divider">
+                        <h2 class="h2_selector">고려사항(선택)</h2>
+                        <hr class="featurette-divider" style="border-top: 8px solid">
+                        <div class="d-flex justify-content-center">
+                            <div style="width: 25%; padding: 20px">
+                                <p class="WForm">농기계 및 설비 유무</p>
+                                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                    <option selected>없음</option>
+                                    <option value="1">충분</option>
+                                </select>
+                            </div>
+                            <div style="width: 25%; padding: 20px">
+                                <p class="WForm">농사 경험 유무</p>
+                                <select class="form-select form-select-lg mb-3">
+                                    <option selected>없음</option>
+                                    <option value="1">3개월 이상</option>
+                                    <option value="2">6개월 이상</option>
+                                    <option value="3">1년 이상</option>
+                                    <option value="4">3년 이상</option>
+                                </select>
+                            </div>
+                        </div>
+                        <hr class="featurette-divider">
                     </form>
 
-                    <button class="btn btn-primary btn-lg" type="button" id="flip">작물 골라보기</button>
+                    <div align="center">
+                        <button class="btn btn-primary btn-lg" type="button" id="flip" style="margin: auto">작물 확인
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -65,7 +150,8 @@
                     <div class="d-flex justify-content-center" style="margin-bottom: 30px">
                         <c:forEach var="i" begin="0" end="6">
                             <!-- Button trigger modal -->
-                            <button id="Fbtn" onclick="fn_click(${i})" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <button id="Fbtn" onclick="fn_click(${i})" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal">
                                 <img src="${contextPath}/resources/image/과일/과일${i+1}.jpg" alt="과일${i+1}" width="100"
                                      height="100" class="rounded-circle">
                             </button>
@@ -326,13 +412,15 @@
                                             <h1> 동영상 </h1>
                                             <div class="d-flex p-2">
                                                 <video width="50%" height="30%" controls>
-                                                    <source src="${contextPath}/resources/Video/자두/자두재배.mp4" type="video/mp4">
+                                                    <source src="${contextPath}/resources/Video/자두/자두재배.mp4"
+                                                            type="video/mp4">
                                                     Your browser does not support the video tag.
                                                 </video>
                                                 <div>
                                                     <h2>새콤달콤 자두 재배하기</h2>
                                                     <p style="width: 80%">
-                                                        자두는 6~7월에 복숭아보다 조금 일찍 생산된다. 마땅한 다른 과일이 없는 시기에 생산되어 입맛을 돋게 하는 과일이다.
+                                                        자두는 6~7월에 복숭아보다 조금 일찍 생산된다. 마땅한 다른 과일이 없는 시기에 생산되어 입맛을 돋게 하는
+                                                        과일이다.
                                                         자두의 재배면적이 증가하고 있지만 수분수에 대한 인식이 낮아 결실이 불안정한 문제점이 있다.
                                                         자두 품종에 대한 특성을 알아보고 결실관리기술에 대해 자세히 소개한다.
                                                     </p>
@@ -341,7 +429,8 @@
                                             <hr class="featurette-divider">
                                             <div class="d-flex p-2">
                                                 <video width="50%" height="30%" controls>
-                                                    <source src="${contextPath}/resources/Video/자두/품종과재배기술.mp4" type="video/mp4">
+                                                    <source src="${contextPath}/resources/Video/자두/품종과재배기술.mp4"
+                                                            type="video/mp4">
                                                     Your browser does not support the video tag.
                                                 </video>
                                                 <div>
@@ -377,11 +466,11 @@
                                             <div style="padding: 10px">
                                                 <table class="table table-sm" style="padding: 10px">
                                                     <c:forEach var="i" begin="0" end="5">
-                                                    <tr class="table-secondary">
-                                                        <td class="table-secondary" style="height: 100px">
-                                                            댓글 입니다.
-                                                        </td>
-                                                    </tr>
+                                                        <tr class="table-secondary">
+                                                            <td class="table-secondary" style="height: 100px">
+                                                                댓글 입니다.
+                                                            </td>
+                                                        </tr>
                                                     </c:forEach>
                                                 </table>
                                             </div>

@@ -123,49 +123,15 @@ public class NoticeBoardService {
         return board;
     }
 
-    public boolean updateBoard(ServletRequestContext src) throws Exception {
+    public boolean updateBoard(BoardVO board, MultipartFile attachFile) throws Exception {
         boolean flag = false;
-        String path = "c:\\download";
-        DiskFileItemFactory factory = new DiskFileItemFactory();
-        factory.setRepository(new File(path));
-        factory.setSizeThreshold(1024*1024);
-        ServletFileUpload upload = new ServletFileUpload(factory);
-        List<FileItem> list = upload.parseRequest(src);
-        BoardVO board = new BoardVO();
-        for(FileItem item : list) {
-            if(item.isFormField()) {
-                String filedName = item.getFieldName();
-                if(filedName.equals("seq")) {
-                    board.setCb_seq(Integer.parseInt(item.getString("UTF-8")));
-                } else if(filedName.equals("title")) {
-                    board.setCb_title(item.getString("UTF-8"));
-                } else if(filedName.equals("content")) {
-                    board.setCb_content(item.getString("UTF-8"));
-                }
-            } else {
-                String name = item.getFieldName();
-                if(name.equals("attachName")) {
-                    String temp = item.getName();
-                    System.out.println(temp);
-                    if(temp==null||temp.trim().equals("")) {
-                        System.out.println("첨부파일 없음");
-                    } else {
-                        int idx = temp.lastIndexOf("\\");
-                        String fileName = temp.substring(idx+1);
-                        System.out.println("파일이름 확인");
-                        board.setCb_originFileName(fileName);
-                        //업로드 실행
-                        File filePath = new File(path + "\\" + fileName);
-                        item.write(filePath);
-                    }
-                }
-            }
-        }
-        flag = noticeDAO.update(board);
-        if(flag) {
-            System.out.println("service update성공");
+        if(attachFile.isEmpty()) {
+            flag = noticeDAO.update(board);
         } else {
-            System.out.println("service update실패");
+            HashMap<String, String> fileNameMap = upload(attachFile);
+            board.setCb_originFileName(fileNameMap.get("originFileName"));
+            board.setCb_serverFileName(fileNameMap.get("serverFileName"));
+            flag = noticeDAO.update(board);
         }
         return flag;
     }
