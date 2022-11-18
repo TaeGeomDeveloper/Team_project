@@ -1,4 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
@@ -28,6 +29,54 @@
         }
     </style>
 
+    <script>
+        $(document).ready(function() {
+            $("#flip").on('click', function (event) {
+
+                let cs_id = $("#cs_id").val();
+                let cs_name = $("#cs_name").val();
+                let cs_sex = $("#cs_sex").val();
+                let cs_age = $("#cs_age").val();
+                let cs_location = $("#cs_location").val();
+                let cs_cropClassification = $("#cs_cropClassification").val();
+                let cs_howFarm = $("#cs_howFarm").val();
+                let cs_harvestSeason = $("#cs_harvestSeason").val();
+                let cs_needMachinery = $("#cs_needMachinery").val();
+                let cs_experience = $("#cs_experience").val();
+
+                let param = {
+                    "cs_id":cs_id,
+                    "cs_name":cs_name,
+                    "cs_sex":cs_sex,
+                    "cs_age":cs_age,
+                    "cs_location":cs_location,
+                    "cs_cropClassification":cs_cropClassification,
+                    "cs_howFarm":cs_howFarm,
+                    "cs_harvestSeason":cs_harvestSeason,
+                    "cs_needMachinery":cs_needMachinery,
+                    "cs_experience":cs_experience
+                }
+
+               $.ajax({
+                   type: 'POST',
+                   url: "${contextPath}/service/FarmProcess.do",
+                   data: JSON.stringify(param),
+                   // dataType: "text",
+                   contentType: "application/json; charset=UTF-8",
+                   dataType: "json",
+                   success: function (data,status){
+                        alert("성공!");
+                       $("#window").slideToggle("slow");
+                   },
+                   error : function(data,status){
+                       // 실패시
+                       alert(data + status);
+                   }
+               }) ;
+            });
+        });
+    </script>
+
 </head>
 <body>
 
@@ -44,71 +93,71 @@
                         지역 환경 고려 하고 지역 특산물을 우선 하는게 좋습니다.<br/>
                     </p>
 
-                    <form style="padding: 20px; border-radius: 25px; margin-bottom: 20px; margin-top: 50px; background: #f7f7f2">
+                    <form id="FarmForm" name="FarmInfo" style="padding: 20px; border-radius: 25px; margin-bottom: 20px; margin-top: 50px; background: #f7f7f2">
                         <h2>본인 정보입력(필수)</h2>
                         <hr class="featurette-divider" style="border-top: 8px solid">
                         <div class="d-flex justify-content-center">
                             <div style="width: 25%; padding: 20px">
-                                <input class="form-control form-control" type="text" placeholder="이름">
+                                <input type="hidden" value="${user.mi_id}" name="cs_id" id="cs_id">
+                                <input class="form-control form-control" type="text" value="${user.mi_name}" name="cs_name" id="cs_name" readonly>
                             </div>
                             <div style="width: 25%; padding: 20px">
-                                <input class="form-control form-control" type="text" placeholder="나이">
+                                <input class="form-control form-control" type="text" placeholder="나이" name="cs_age" id="cs_age">
                             </div>
                             <div style="width: 25%; padding: 20px">
-                                <select class="form-select form-select mb-3">
-                                    <option selected>성별</option>
-                                    <option value="1">남자</option>
-                                    <option value="2">여자</option>
+                                <select class="form-select form-select mb-3" name="cs_sex" id="cs_sex">
+                                    <option selected value="men">남자</option>
+                                    <option value="women">여자</option>
                                 </select>
                             </div>
                         </div>
                         <hr class="featurette-divider">
-                        <h2 class="h2_selector">귀농 희망지역(선택)</h2>
+                        <h2 class="h2_selector">귀농 희망지역(필수)</h2>
                         <hr class="featurette-divider" style="border-top: 8px solid">
                         <div class="d-flex justify-content-center">
                             <div style="width: 30%; padding: 20px">
                                 <p class="WForm">지역</p>
-                                <select class="form-select form-select mb-3">
-                                    <option selected>전체</option>
-                                    <option value="1">강원도</option>
-                                    <option value="2">경기도</option>
-                                    <option value="3">충청북도</option>
-                                    <option value="4">충청남도</option>
-                                    <option value="5">경상북도</option>
-                                    <option value="6">경상남도</option>
-                                    <option value="7">전라북도</option>
-                                    <option value="8">전라남도</option>
+                                <select class="form-select form-select mb-3" name="cs_location" id="cs_location">
+                                    <option selected value="전체">전체</option>
+                                    <option value="강원도">강원도</option>
+                                    <option value="경기도">경기도</option>
+                                    <option value="충청북도">충청북도</option>
+                                    <option value="충청남도">충청남도</option>
+                                    <option value="경상북도">경상북도</option>
+                                    <option value="경상남도">경상남도</option>
+                                    <option value="전라북도">전라북도</option>
+                                    <option value="전라남도">전라남도</option>
                                 </select>
                             </div>
                         </div>
                         <hr class="featurette-divider">
-                        <h2 class="h2_selector">작물 분류(선택)</h2>
+                        <h2 class="h2_selector">작물 분류(필수)</h2>
                         <hr class="featurette-divider" style="border-top: 8px solid">
                         <div class="d-flex justify-content-center">
                             <div style="width: 25%; padding: 20px">
                                 <p class="WForm">작물분류</p>
-                                <select class="form-select form-select mb-3">
-                                    <option selected>전체</option>
-                                    <option value="1">과일</option>
-                                    <option value="2">채소</option>
+                                <select class="form-select form-select mb-3" name="cs_cropClassification" id="cs_cropClassification">
+                                    <option selected value="전체">전체</option>
+                                    <option value="과일">과일</option>
+                                    <option value="채소">채소</option>
                                 </select>
                             </div>
                             <div style="width: 25%; padding: 20px">
                                 <p class="WForm">재배 방법</p>
-                                <select class="form-select form-select mb-3" aria-label=".form-select-lg example">
-                                    <option selected>전체</option>
-                                    <option value="1">노지</option>
-                                    <option value="2">비닐하우스</option>
+                                <select class="form-select form-select mb-3" aria-label=".form-select-lg example" name="cs_howFarm" id="cs_howFarm">
+                                    <option selected value="둘다">둘다</option>
+                                    <option value="노지">노지</option>
+                                    <option value="비닐하우스">비닐하우스</option>
                                 </select>
                             </div>
                             <div style="width: 25%; padding: 20px">
                                 <p class="WForm">수학 시기</p>
-                                <select class="form-select form-select mb-3" >
-                                    <option selected>계절</option>
-                                    <option value="1">봄</option>
-                                    <option value="2">여름</option>
-                                    <option value="3">가을</option>
-                                    <option value="4">겨울</option>
+                                <select class="form-select form-select mb-3" name="cs_harvestSeason" id="cs_harvestSeason">
+                                    <option selected value="전체">모두</option>
+                                    <option value="봄">봄</option>
+                                    <option value="여름">여름</option>
+                                    <option value="가을">가을</option>
+                                    <option value="겨울">겨울</option>
                                 </select>
                             </div>
                         </div>
@@ -118,29 +167,29 @@
                         <div class="d-flex justify-content-center">
                             <div style="width: 25%; padding: 20px">
                                 <p class="WForm">농기계 및 설비 유무</p>
-                                <select class="form-select form-select mb-3" >
-                                    <option selected>없음</option>
-                                    <option value="1">충분</option>
+                                <select class="form-select form-select mb-3" name="cs_needMachinery" id="cs_needMachinery">
+                                    <option selected value="no">없음</option>
+                                    <option value="yes">충분</option>
                                 </select>
                             </div>
                             <div style="width: 25%; padding: 20px">
                                 <p class="WForm">농사 경험 유무</p>
-                                <select class="form-select form-select mb-3">
-                                    <option selected>없음</option>
-                                    <option value="1">3개월 이상</option>
-                                    <option value="2">6개월 이상</option>
-                                    <option value="3">1년 이상</option>
-                                    <option value="4">3년 이상</option>
+                                <select class="form-select form-select mb-3" name="cs_experience" id="cs_experience">
+                                    <option selected value="없음">없음</option>
+                                    <option value="3개월">3개월 이상</option>
+                                    <option value="6개월">6개월 이상</option>
+                                    <option value="1년이상">1년 이상</option>
+                                    <option value="3년이상">3년 이상</option>
                                 </select>
                             </div>
                         </div>
                         <hr class="featurette-divider">
+                        <div align="center">
+                            <button class="btn btn-primary btn-lg" type="button" id="flip" style="margin: auto">작물 확인
+                            </button>
+                        </div>
                     </form>
 
-                    <div align="center">
-                        <button class="btn btn-primary btn-lg" type="button" id="flip" style="margin: auto">작물 확인
-                        </button>
-                    </div>
                 </div>
             </div>
 

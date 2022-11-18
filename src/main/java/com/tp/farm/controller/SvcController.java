@@ -12,17 +12,33 @@
 
 package com.tp.farm.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import com.tp.farm.dao.SvcDAO;
+import com.tp.farm.service.SvcService;
+import com.tp.farm.vo.CropSelectVO;
+import java.io.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/*
+        작성자 : 윤태검
+
+        내용 : 귀농지원 서비스
+
+ */
+
 @RestController("SvcController")
 @RequestMapping("/service")
 public class SvcController {
+
+    @Autowired
+    private SvcDAO svcDao;
+    private CropSelectVO selectVO;
+//    @Autowired
+//    private SvcService service;
 
     // 메인 페이지
     @RequestMapping(value = "/Main.do", method = {RequestMethod.GET, RequestMethod.POST})
@@ -93,6 +109,21 @@ public class SvcController {
         viewName= "/service/Farm";
         mav.setViewName(viewName);
         return mav;
+    }
+     // 작물 선택 절차
+    @RequestMapping(value = "/FarmProcess.do", method = {RequestMethod.GET, RequestMethod.POST})
+    public CropSelectVO FarmProcess(@RequestBody CropSelectVO selectVO) throws  Exception{
+
+        if(selectVO == null){
+            System.out.println("theres no VO founded");
+        } else {
+            System.out.println("VO ON");
+        }
+
+        System.out.println("작물 선택 절차");
+        svcDao.insertFarmInfo(selectVO);
+
+        return selectVO;
     }
 
     private String getViewName(HttpServletRequest request) throws Exception {

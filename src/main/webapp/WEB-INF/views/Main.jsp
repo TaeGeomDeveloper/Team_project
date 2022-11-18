@@ -27,11 +27,14 @@
         <div id="Main_Box" align="center">
             <img src="${contextPath}/resources/image/Job/알바.jpg" alt="promo1" width="800" height="450">
         </div>
+
+
+
     </article>
 </section>
 
 <%--슬라이더--%>
-<main style="width: 1200px; height: 700px; margin: auto">
+<main style="width: 80%; height: 700px; margin: auto">
     <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>

@@ -22,13 +22,6 @@ function drawChart() {
     chart.draw(data, options);
 }
 
-// 리스트 열고 닫기
-$(document).ready(function () {
-    $("#flip").click(function () {
-        $("#window").slideToggle("slow");
-    });
-});
-
 // PDF
 function PDF_popup() {
     //${contextPath}/resources/PDF/Pdf1.jsp
