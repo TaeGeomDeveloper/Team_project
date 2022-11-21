@@ -18,9 +18,10 @@
             var replyForm = document.replyForm;
             let cbr_replyId = $("#cbr_replyId").val();
             let cbr_content = $("#cbr_content").val();
-
+            alert(cbr_replyId);
             if(cbr_replyId == ""){
                 alert("로그인이 필요합니다");
+                console.log(cbr_replyId);
                 cbr_replyId.focus();
                 return false;
             };
@@ -41,18 +42,18 @@
     <script>
         function reReplyForm_check(){
             var reReplyForm = document.reReplyForm;
-            let cbr_replyId = $("#cbr_replyId").val();
-            let cbr_content = $("#cbr_content").val();
-
-            if(cbr_replyId == ""){
+            let cbr_reReplyId = $("#cbr_reReplyId").val();
+            let cbr_reContent = $("#cbr_reContent").val();
+            alert(cbr_reReplyId);
+            if(cbr_reReplyId == ""){
                 alert("로그인이 필요합니다");
-                cbr_replyId.focus();
+                cbr_reReplyId.focus();
                 return false;
             };
 
-            if(cbr_content == ""){
+            if(cbr_reContent == ""){
                 alert("내용을 입력해주세요");
-                cbr_content.focus();
+                cbr_reContent.focus();
                 return false;
             };
 
@@ -206,12 +207,12 @@
                                                         <tr>
                                                             <td>아이디</td>
                                                             <td><input class="form-control" placeholder="ID" type="text"
-                                                                       name="cbr_replyId" id="cbr_replyId" style="width: 150px"/></td>
+                                                                       name="cbr_replyId" id="cbr_reReplyId" style="width: 150px"/></td>
                                                         </tr>
                                                         <tr>
                                                             <td>내용</td>
                                                             <td><textarea class="form-control"
-                                                                          id="cbr_content"
+                                                                          id="cbr_reContent"
                                                                           style="height: 100px; width: 600px"
                                                                           name="cbr_content"></textarea></td>
                                                         </tr>
