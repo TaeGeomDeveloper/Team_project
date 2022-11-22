@@ -22,6 +22,7 @@ public class CsvService {
 
     //DB에 insert 실행하는 코드
     public void insertDataTraditionalMarket() throws SQLException, IOException {
+//        boolean flag = csvDAO.insertDataTraditionalMarket(this.getTraditionalMarketData());
         boolean flag = csvDAO.deleteTraditionalMarketData();
         if(flag){
             //System.out.println("전통시장 데이터 모두 삭제 완료");
@@ -32,6 +33,7 @@ public class CsvService {
     }
 
     public void  insertDataFarmlandPrice() throws SQLException, IOException{
+//        boolean flag = csvDAO.insertDataFarmlandPrice(this.getFarmlandPriceData());
         boolean flag = csvDAO.deleteFarmlandPriceData();
         if(flag){
             //System.out.println("농지 시세 테이블 모두 삭제 완료");
@@ -41,6 +43,7 @@ public class CsvService {
     }
 
     public void  insertCropData() throws SQLException, IOException{
+//        boolean flag = csvDAO.insertDataCropData(this.getCropData());
         boolean flag = csvDAO.deleteCropData();
         if(flag){
             //System.out.println("농지 시세 테이블 모두 삭제 완료");

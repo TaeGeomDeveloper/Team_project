@@ -23,7 +23,7 @@
 <%--헤더--%>
 <section class="head">
     <header>
-        스마트팜
+        Back To The Farm
     </header>
     <nav>
         <c:choose>
