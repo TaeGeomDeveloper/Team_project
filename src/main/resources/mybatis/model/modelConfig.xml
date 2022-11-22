@@ -7,7 +7,13 @@
 		<typeAlias type="com.tp.farm.vo.MemberVO" alias="memberVO" />
 		<typeAlias type="com.tp.farm.vo.BoardVO" alias="boardVO"/>
 		<typeAlias type="com.tp.farm.vo.ReplyVO" alias="replyVO"/>
+<<<<<<< HEAD
 		<typeAlias type="com.tp.farm.vo.CropSelectVO" alias="CropSelectVO"/>
 		<typeAlias type="com.tp.farm.vo.FarmlandPriceVO" alias="FarmlandPriceVO"/>
+=======
+		<typeAlias type="com.tp.farm.vo.CropDataVO" alias="cropDataVO"/>
+		<typeAlias type="com.tp.farm.vo.FarmlandPriceVO" alias="farmlandPriceVO"/>
+		<typeAlias type="com.tp.farm.vo.TraditionalMarketVO" alias="traditionalMarketVO"/>
+>>>>>>> 9bb040083f0803bcd28542e3b202313593f29148
 	</typeAliases>
 </configuration>

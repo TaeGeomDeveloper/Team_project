@@ -123,6 +123,7 @@
                 let phoneNum = $("#mi_phone").val();
                 let phoneNum1 = $("#mi_phone1").val();
                 let phoneNum2 = $("#mi_phone2").val();
+<<<<<<< HEAD
                 var sendNumber = phoneNum + phoneNum1 + phoneNum2;
                 $.ajax({
                     type: "POST",
@@ -131,6 +132,20 @@
                     cache: false,
                     success: function (data) {
                         if (data == "error") {
+=======
+                console.log(phoneNum2);
+                const sendNumber = phoneNum+phoneNum1+phoneNum2;
+                if(sendNumber=="010"){
+                    alert("휴대폰 번호가 올바르지 않습니다");
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "${contextPath}/member/sendSMS.do",
+                    data: {to : sendNumber},
+                    cache: false,
+                    success: function (data){
+                        if(data==" "){
+>>>>>>> 9bb040083f0803bcd28542e3b202313593f29148
                             alert("휴대폰 번호가 올바르지 않습니다.");
                         } else {
                             //alert("전송 완료");

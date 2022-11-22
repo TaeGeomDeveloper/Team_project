@@ -22,8 +22,13 @@
 
 <%--헤더--%>
 <section class="head">
+<<<<<<< HEAD
     <header style="font-size: 60px">
         스마트팜
+=======
+    <header>
+        Back To The Farm
+>>>>>>> 9bb040083f0803bcd28542e3b202313593f29148
     </header>
     <nav>
         <c:choose>
