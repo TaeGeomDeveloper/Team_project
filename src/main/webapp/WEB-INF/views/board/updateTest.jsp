@@ -12,7 +12,8 @@
     <link rel="stylesheet" href="${contextPath}/resources/summernote/css/summernote-lite.css">
 
     <script>
-            $(document).ready(function() {
+            $(document).ready(function()
+            	{
             	    var fontSizes = [ '8', '9', '10', '11', '12', '14','16', '18', '20', '22', '24', '28', '30', '36', '50', '72','100' ];
             		var fontNames = [ '맑은 고딕', '궁서', '굴림체', '굴림', '바탕체', 'Arial', 'Arial Black','Comic Sans MS', 'Courier New' ];
             		var toolbar = [[ 'fontname', [ 'fontname' ] ],
@@ -67,16 +68,24 @@
             			});
             		}
             	});
-            };
+            }
     </script>
 
     <script>
-            function fn_click() {
-                var updateForm = document.updateForm;
-                updateForm.method = "post";
-                updateForm.action = "./updateBoard.do";
-                updateForm.submit();
-            }
+        function update_check(){
+            var updateForm = document.updateForm;
+            let cb_title = $("#cb_title").val();
+
+            if(cb_title == ""){
+                alert("제목를 입력해주세요");
+                cb_title.focus();
+                return false;
+            };
+
+            updateForm.method = "post";
+            updateForm.action = "./updateBoard.do";
+            updateForm.submit();
+        }
     </script>
 
     <style>
@@ -96,7 +105,7 @@
                 <table>
                     <tr>
                         <th>제목</th>
-                        <td><input type="text" name="cb_title" value="${board.cb_title}"></td>
+                        <td><input type="text" name="cb_title" id="cb_title" value="${board.cb_title}"></td>
                         <td><input type="hidden" name="cb_seq" value="${board.cb_seq}" ></td>
                     </tr>
                     <tr>
@@ -108,11 +117,11 @@
                         <th>첨부파일</th> <td><input type="file" name="cb_attachedFile" >${cb_cb_originFileName}</td>
                     </tr>
                 </table>
+                <div style="margin: auto">
+                    <button class="button2" type="button" onclick="update_check()" >수정하기</button>
+                </div>
             </form>
 
-            <div style="margin: auto">
-                <button class="button2" type="submit" onclick="fn_click()" >수정하기</button>
-            </div>
         </div>
 
     </article>

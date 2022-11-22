@@ -151,16 +151,17 @@
                                             </div>
                                             <button class="button" onclick="fn_click2(${reply.cbr_bundleSeq})">답글 달기</button>
                                             <div class="${reply.cbr_bundleSeq}" style="display: none; align-content: center">
-                                                <form action="writeReReply.do" method="post">
+                                                <form name="reReplyForm" method="post">
                                                     <table>
                                                         <tr>
                                                             <td>아이디</td>
                                                             <td><input class="form-control" placeholder="ID" type="text"
-                                                                       name="cbr_replyId" style="width: 150px"/></td>
+                                                                       name="cbr_replyId" id="cbr_reReplyId" style="width: 150px"/></td>
                                                         </tr>
                                                         <tr>
                                                             <td>내용</td>
                                                             <td><textarea class="form-control"
+                                                                          id="cbr_reContent"
                                                                           style="height: 100px; width: 600px"
                                                                           name="cbr_content"></textarea></td>
                                                         </tr>
@@ -173,7 +174,7 @@
                                                                        value="${reply.cbr_currentSeq}"/></td>
                                                         </tr>
                                                     </table>
-                                                    <button type="submit" class="button2">댓글등록</button>
+                                                    <button class="button2" type="button" onclick="reReplyForm_check()" >수정하기</button>
                                                 </form>
                                             </div>
 
@@ -187,22 +188,40 @@
                 </table>
             </div>
 
-            <form action="writeReply.do" method="post">
+            <form name="replyForm" method="post">
                 <table style="margin-bottom: 30px">
                     <tr>
                         <th>아이디</th>
-                        <td><input class="form-control" type="text" name="cbr_replyId" style="width: 150px"/></td>
+                        <td><input class="form-control" type="text" name="cbr_replyId" id="cbr_replyId" style="width: 150px"/></td>
                     </tr>
                     <tr>
                         <th>댓글</th>
-                        <td><textarea class="form-control" id="floatingTextarea2" style="height: 100px; width: 600px"
+                        <td><textarea class="form-control" id="cbr_content" style="height: 100px; width: 600px"
                                       name="cbr_content"></textarea></td>
                         <input type="hidden" name="cb_seq" value="${board.cb_seq}">
                     </tr>
                 </table>
-                <button type="submit" class="button2">댓글등록</button>
+                <button type="button" class="button2" onclick="replyForm_check()" >댓글등록</button>
             </form>
         </div>
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
 
     </article>
 </section>

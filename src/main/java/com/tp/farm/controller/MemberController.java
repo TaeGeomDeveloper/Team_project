@@ -15,6 +15,7 @@ import com.tp.farm.vo.MemberVO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Random;
 
@@ -99,15 +100,22 @@ public class MemberController {
 	// 로그인 절차
 	@RequestMapping(value="/loginProcess.do", method = {RequestMethod.POST, RequestMethod.GET})
 	public ResponseEntity<String> loginProcess(@RequestParam("mi_id") String mi_id, @RequestParam("mi_password") String mi_password,
-											   HttpServletRequest request, HttpServletResponse response) throws Exception {
+											   HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws Exception {
+												// HttpSession Bean 주입 -> session 영역에 접근 가능.
 		boolean flag = false;
-
 		MemberVO member = memberDAO.checkMember(mi_id, mi_password);
 		if(member!=null){
 			flag = true;
-			request.getSession().setAttribute("user", member);
+			request.getSession().setAttribute("user", member);	// session을 생성하면서 member OBJ를 user라는 이름으로 session 영역에 던져 놓음.
 			boolean session = request.isRequestedSessionIdValid();
 			System.out.println("login session : "+session);
+			try{
+				MemberVO mem = (MemberVO) httpSession.getAttribute("user");	// session 영역에서 원하는 데이터를 가져올 수 있게 된다.
+				System.out.println(mem.getMi_id()+" 계정으로 접속되었습니다.");
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+
 		}
 
 		System.out.println("로그인 회원 체크 : "+flag);

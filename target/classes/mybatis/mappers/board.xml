@@ -36,7 +36,7 @@
         ]]>
     </select>
 
-    <select id="updateDownloadCount" parameterType="java.lang.Integer">
+    <select id="updateDownloadCount" parameterType="java.lang.String">
         <![CDATA[
             update community_board
             set cb_downloadCount = cb_downloadCount+1
@@ -55,6 +55,14 @@
     <select id="deleteOne" parameterType="java.lang.String">
         <![CDATA[
             delete from community_board
+            where cb_seq=#{cb_seq}
+        ]]>
+    </select>
+
+    <select id="updateViewCount" parameterType="java.lang.String">
+        <![CDATA[
+            update community_board
+            set cb_viewCount=cb_viewCount+1
             where cb_seq=#{cb_seq}
         ]]>
     </select>
