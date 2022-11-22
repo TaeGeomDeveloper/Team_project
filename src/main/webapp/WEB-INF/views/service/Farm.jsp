@@ -66,7 +66,7 @@
                    dataType: "json",
                    success: function (data,status){
                         alert("성공!");
-                       $("#window").slideToggle("slow");
+                       $("#window").slideDown("slow");
                    },
                    error : function(data,status){
                        // 실패시
