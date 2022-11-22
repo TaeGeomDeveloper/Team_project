@@ -60,19 +60,13 @@ public class MemberDAO {
 		return flag;
 	}
 
-	//로그인 할 때 패스워드 체크
-//	public MemberVO checkMemberPwd(String pwd) {
-//		MemberVO memberVO = sqlSession.selectOne("mapper.member.selectMemberByPwd", pwd);
-//
-//		return memberVO;
-//	}
 	//로그인 할 때 회원인지 체크
 	public MemberVO checkMember(String mi_id, String mi_password) {
 		// TODO Auto-generated method stub
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("mi_id", mi_id);
 		map.put("mi_password",mi_password);
-		MemberVO member = sqlSession.selectOne("mapper.member.findMember", map);
+		MemberVO member = sqlSession.selectOne("mapper.member.checkMember", map);
 		return member;
 	}
 

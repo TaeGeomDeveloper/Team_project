@@ -12,6 +12,56 @@
     <title>Main</title>
     <!-- 스타일시트 연결 -->
 
+    <!-- 댓글등록 button -->
+    <script>
+        function replyForm_check(){
+            var replyForm = document.replyForm;
+            let cbr_replyId = $("#cbr_replyId").val();
+            let cbr_content = $("#cbr_content").val();
+
+            if(cbr_replyId == ""){
+                alert("로그인이 필요합니다");
+                cbr_replyId.focus();
+                return false;
+            };
+
+            if(cbr_content == ""){
+                alert("내용을 입력해주세요");
+                cbr_content.focus();
+                return false;
+            };
+
+            replyForm.method = "post";
+            replyForm.action = "./writeReply.do";
+            replyForm.submit();
+        }
+    </script>
+
+    <!-- 대댓글등록 button -->
+    <script>
+        function reReplyForm_check(){
+            var reReplyForm = document.reReplyForm;
+            let cbr_replyId = $("#cbr_replyId").val();
+            let cbr_content = $("#cbr_content").val();
+
+            if(cbr_replyId == ""){
+                alert("로그인이 필요합니다");
+                cbr_replyId.focus();
+                return false;
+            };
+
+            if(cbr_content == ""){
+                alert("내용을 입력해주세요");
+                cbr_content.focus();
+                return false;
+            };
+
+            reReplyForm.method = "post";
+            reReplyForm.action = "./writeReReply.do";
+            reReplyForm.submit();
+        }
+    </script>
+
     <script>
         // 대댓글 출력하기
         function fn_click(number) {
@@ -57,7 +107,7 @@
                         <td>${board.mi_id}</td>
                         <td>${board.cb_regDate}</td>
                         <td>${board.cb_viewCount}</td>
-                        <td><a href="download.do?seq=${board.cb_seq}&token=on">
+                        <td><a href="download.do?cb_seq=${board.cb_seq}&token=on">
                             ${board.cb_originFileName}</a></td>
                         <td>${board.cb_downloadCount}</td>
                         <td><a href="viewUpdatePage.do?cb_seq=${board.cb_seq}">
@@ -67,7 +117,7 @@
                     </tbody>
                 </table>
             </div>
-            <div style="width: 80%; border: 5px solid #04AA6D; border-radius: 20px; height: 700px">
+            <div style="width: 80%; border: 5px solid #04AA6D; border-radius: 20px; text-align: left">
                 ${board.cb_content}
             </div>
 
@@ -151,16 +201,17 @@
                                             </div>
                                             <button class="button" onclick="fn_click2(${reply.cbr_bundleSeq})">답글 달기</button>
                                             <div class="${reply.cbr_bundleSeq}" style="display: none; align-content: center">
-                                                <form action="writeReReply.do" method="post">
+                                                <form name="reReplyForm" method="post">
                                                     <table>
                                                         <tr>
                                                             <td>아이디</td>
                                                             <td><input class="form-control" placeholder="ID" type="text"
-                                                                       name="cbr_replyId" style="width: 150px"/></td>
+                                                                       name="cbr_replyId" id="cbr_replyId" style="width: 150px"/></td>
                                                         </tr>
                                                         <tr>
                                                             <td>내용</td>
                                                             <td><textarea class="form-control"
+                                                                          id="cbr_content"
                                                                           style="height: 100px; width: 600px"
                                                                           name="cbr_content"></textarea></td>
                                                         </tr>
@@ -173,7 +224,7 @@
                                                                        value="${reply.cbr_currentSeq}"/></td>
                                                         </tr>
                                                     </table>
-                                                    <button type="submit" class="button2">댓글등록</button>
+                                                    <button class="button2" type="button" onclick="reReplyForm_check()" >수정하기</button>
                                                 </form>
                                             </div>
 
@@ -187,20 +238,20 @@
                 </table>
             </div>
 
-            <form action="writeReply.do" method="post">
+            <form name="replyForm" method="post">
                 <table style="margin-bottom: 30px">
                     <tr>
                         <th>아이디</th>
-                        <td><input class="form-control" type="text" name="cbr_replyId" style="width: 150px"/></td>
+                        <td><input class="form-control" type="text" name="cbr_replyId" id="cbr_replyId" style="width: 150px"/></td>
                     </tr>
                     <tr>
                         <th>댓글</th>
-                        <td><textarea class="form-control" id="floatingTextarea2" style="height: 100px; width: 600px"
+                        <td><textarea class="form-control" id="cbr_content" style="height: 100px; width: 600px"
                                       name="cbr_content"></textarea></td>
                         <input type="hidden" name="cb_seq" value="${board.cb_seq}">
                     </tr>
                 </table>
-                <button type="submit" class="button2">댓글등록</button>
+                <button type="button" class="button2" onclick="replyForm_check()" >댓글등록</button>
             </form>
         </div>
 

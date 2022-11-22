@@ -23,7 +23,7 @@
 <%--헤더--%>
 <section class="head">
     <header>
-        스마트팜
+        Back To The Farm
     </header>
     <nav>
         <c:choose>
@@ -83,7 +83,6 @@
                         </a>
                         <ul class="dropdown-menu gap-1 p-2 rounded-3 mx-0 shadow w-220px">
                             <li><a class="dropdown-item rounded-2 active" href="${contextPath}/notice/BoardList.do">공지사항</a></li>
-                            <li><a class="dropdown-item rounded-2" href="${contextPath}/board/BoardList.do">자유게시판</a></li>
                             <li><a class="dropdown-item rounded-2" href="${contextPath}/smartfarm/News.do">관련 뉴스</a></li>
                             <li><a class="dropdown-item rounded-2" href="${contextPath}/smartfarm/Support.do">농부 지원 사업</a></li>
                             <li><hr class="dropdown-divider"></li>
@@ -105,6 +104,9 @@
                             </li>
                             <li><a class="dropdown-item rounded-2" href="${contextPath}/smartfarm/SmartfarmSalesList.do">스마트팜 장비</a></li>
                         </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="${contextPath}/board/BoardList.do">쉼터</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="${contextPath}/service/Job.do">알바</a>

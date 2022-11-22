@@ -1,17 +1,15 @@
+<!--
+작성자 : 윤태검, 이영록
+내용 : 공지사항 화면 설계 및 구성. / Notice.jsp
+
+일시 : 2022.10.10 ~
+-->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%--
-        작성자 : 윤태검
-
-        내용 : 공지사항 JSP
-        일시 : 2022-11-03
-
---%>
-
 <html>
 <head>
-    <title>List</title>
+    <title>공지사항</title>
 
 </head>
 <body>

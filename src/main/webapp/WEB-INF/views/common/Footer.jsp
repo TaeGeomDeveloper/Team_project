@@ -1,4 +1,9 @@
+<!--
+작성자 : 윤태검
+내용 : Footer
 
+일시 : 2022.10.10 ~
+-->
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>

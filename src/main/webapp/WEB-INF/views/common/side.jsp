@@ -1,3 +1,9 @@
+<!--
+작성자 : 윤태검
+내용 : Sidebar (임시) 사용하지는 않음.
+
+일시 : 2022.10.10 ~
+-->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     isELIgnored="false" %>

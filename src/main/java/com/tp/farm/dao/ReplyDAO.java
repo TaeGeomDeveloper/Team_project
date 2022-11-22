@@ -47,8 +47,8 @@ public class ReplyDAO {
         return flag;
     }
 
-    public List<ReplyVO> selectAllReply(String seq) {
-        List<ReplyVO> list = sqlSession.selectList("mapper.reply.selectAllReply", seq);
+    public List<ReplyVO> selectAllReply(String cb_seq) {
+        List<ReplyVO> list = sqlSession.selectList("mapper.reply.selectAllReply", cb_seq);
         return list;
     }
 

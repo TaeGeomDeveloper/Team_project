@@ -36,8 +36,8 @@ public class ReplyService {
         return flag;
     }
 
-    public List<ReplyVO> readAllReply(String seq) {
-        List<ReplyVO> list = replyDAO.selectAllReply(seq);
+    public List<ReplyVO> readAllReply(String cb_seq) {
+        List<ReplyVO> list = replyDAO.selectAllReply(cb_seq);
         return  list;
     }
 

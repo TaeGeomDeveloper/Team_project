@@ -42,11 +42,13 @@
     String mode = request.getParameter("mode");
     //System.out.println(mode);
     String read_only = "readonly='readonly'";
-    String border_none = "border:none;" +
+    String width = "width:500px;";
+    String border_none =
+            "border:none;" +
             "border-right:0px;" +
             "border-top:0px;" +
             "border-left:0px;" +
-            "border-bottom:0px";
+            "border-bottom:0px;";
     MemberVO member = (MemberVO)request.getAttribute("member");
     String mbId = member.getMi_id();
 %>
@@ -114,8 +116,9 @@
                             </td>
                             <th>주소</th>
                             <td>
-                                <input type="text" style="width:500px;" value="${member.mi_address}" name="mi_address" <%if(mode.equals("r")){
+                                <input type="text"  value="${member.mi_address}" name="mi_address" <%if(mode.equals("r")){
                                     out.print(read_only+" ");
+                                    out.print("style="+width);
                                     out.print("style="+border_none);
                                 }%>/>
                             </td>
@@ -130,9 +133,11 @@
                             </td>
                             <th>상세 주소</th>
                             <td>
-                                <input type="text" style="width:500px;" value="${member.mi_addressDetail}" name="mi_addressDetail" <%if(mode.equals("r")){
+                                <input type="text"  value="${member.mi_addressDetail}" name="mi_addressDetail" <%if(mode.equals("r")){
                                     out.print(read_only+" ");
+                                    out.print("style="+width);
                                     out.print("style="+border_none);
+                                    //out.print(width+" ");
                                 }%>/>
                             </td>
                         </tr>
@@ -141,7 +146,7 @@
                             <td> <input type="text" value="${member.mi_joinDate}" readonly="readonly" style="border: none;"/> </td>
                             <th>우편번호</th>
                             <td>
-                                <input type="text" style="width:100px;" value="${member.mi_addressCode}" name="mi_addressCode"<%if(mode.equals("r")){
+                                <input type="text" value="${member.mi_addressCode}" name="mi_addressCode"<%if(mode.equals("r")){
                                     out.print(read_only+" ");
                                     out.print("style="+border_none);
                                 }%>/>

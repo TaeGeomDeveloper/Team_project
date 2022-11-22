@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: User
@@ -6,6 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
     <title>Main</title>
@@ -25,7 +27,7 @@
         function goPopup() {
             // 주소검색을 수행할 팝업 페이지를 호출합니다.
             // 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(https://business.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
-            var pop = (window.open("../${contextPath}/resources/jusoPopup.jsp", "pop", "width=570,height=420, scrollbars=yes, resizable=yes"));
+            var pop = (window.open("${contextPath}/resources/jusoPopup.jsp", "pop", "width=570,height=420, scrollbars=yes, resizable=yes"));
 
             // 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(https://business.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
             //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes");
@@ -53,7 +55,7 @@
                 $.ajax({
                     type : 'get',
                     dataType : 'text',
-                    url : "/smartfarm/member/idCheck.do",
+                    url : "${contextPath}/member/idCheck.do",
                     data : {mi_id : memberId},
                     success : function (data, status) {
                         //alert(data);
@@ -123,14 +125,18 @@
                 let phoneNum = $("#mi_phone").val();
                 let phoneNum1 = $("#mi_phone1").val();
                 let phoneNum2 = $("#mi_phone2").val();
-                var sendNumber = phoneNum+phoneNum1+phoneNum2;
+                console.log(phoneNum2);
+                const sendNumber = phoneNum+phoneNum1+phoneNum2;
+                if(sendNumber=="010"){
+                    alert("휴대폰 번호가 올바르지 않습니다");
+                }
                 $.ajax({
                     type: "POST",
-                    url: "./sendSMS.do",
+                    url: "${contextPath}/member/sendSMS.do",
                     data: {to : sendNumber},
                     cache: false,
                     success: function (data){
-                        if(data=="error"){
+                        if(data==" "){
                             alert("휴대폰 번호가 올바르지 않습니다.");
                         }else{
                             //alert("전송 완료");
@@ -407,7 +413,7 @@
                         <td><input type="hidden" name="mi_joinDate"></td>
                     </tr>
                 </table>
-                <button class="button2" onclick="joinform_check();" id="validate" >가입 하기</button>
+                <button class="button2" type="button" onclick="joinform_check();" id="validate" >가입 하기</button>
             </form>
         </div>
 
