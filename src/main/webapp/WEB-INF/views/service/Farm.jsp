@@ -93,6 +93,7 @@
                         지역 환경 고려 하고 지역 특산물을 우선 하는게 좋습니다.<br/>
                     </p>
 
+<%--작물 선택--%>
                     <form id="FarmForm" name="FarmInfo" style="padding: 20px; border-radius: 25px; margin-bottom: 20px; margin-top: 50px; background: #f7f7f2">
                         <h2>본인 정보입력(필수)</h2>
                         <hr class="featurette-divider" style="border-top: 8px solid">
@@ -193,8 +194,8 @@
                 </div>
             </div>
 
+<%-- 작물 정보 --%>
             <div id="window" style="display: none">
-
                 <div id="Main_Box" align="center">
                     <div class="d-flex justify-content-center" style="margin-bottom: 30px">
                         <c:forEach var="i" begin="0" end="6">
@@ -207,7 +208,7 @@
                         </c:forEach>
                     </div>
 
-                    <!-- Modal -->
+<!-- Modal -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                          aria-hidden="true">
                         <div class="modal-dialog modal-xl">
